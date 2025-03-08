@@ -56,14 +56,15 @@ function BookSearch() {
       <div className="search-bar-container">
         <form onSubmit={handleSearch} className="search-form">
           <div className="search-input-wrapper">
+            <FaSearch className="search-icon" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="ISBN, genre, title, author"
               className="search-input"
+              style={{ paddingLeft: "2.5rem" }}
             />
-            <FaSearch className="search-icon" />
           </div>
           <button type="submit" className="search-button">
             Search

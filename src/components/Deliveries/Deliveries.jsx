@@ -37,7 +37,7 @@ function Deliveries() {
 
   return (
     <div className="deliveries-container">
-      <h1 className="deliveries-title">DELIVERIES</h1>
+      <h1 className="deliveries-title">Deliveries</h1>
 
       {loading ? (
         <p className="loading-message">Loading deliveries...</p>

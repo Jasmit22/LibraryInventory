@@ -6,22 +6,20 @@
   padding: 1rem 2rem;
   background-color: #1a365d;
   color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-logo h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700; /* Using a bolder weight for the logo */
+.navbar-logo {
+  cursor: pointer;
 }
 
 .logo-text {
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.logo-text:hover {
-  opacity: 0.9;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .navbar-links {
@@ -79,7 +77,6 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s;
-  font-weight: 500;
 }
 
 .auth-button:hover {
@@ -107,4 +104,9 @@
   .navbar-logo h1 {
     font-size: 1rem;
   }
+}
+
+/* Add some padding to the main content to prevent it from appearing under the navbar */
+.main-wrapper {
+  padding-top: 0.5rem;
 }

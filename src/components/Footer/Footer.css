@@ -6,7 +6,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-top: auto; /* This pushes the footer to the bottom */
+}
+
+.footer p {
+  margin: 0;
 }
 
 .footer-links {
@@ -15,10 +21,32 @@
 }
 
 .footer-links a {
-  color: #e2e8f0;
+  color: white;
   text-decoration: none;
+  transition: opacity 0.3s;
 }
 
 .footer-links a:hover {
+  opacity: 0.8;
   text-decoration: underline;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.2rem;
+  }
+
+  .footer-links {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
 }

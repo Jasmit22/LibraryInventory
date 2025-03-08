@@ -21,6 +21,13 @@ body {
   background-color: #f8f9fa;
   min-width: 100%;
   min-height: 100vh;
+  overscroll-behavior: none; /* Prevents bouncing/rubber-band scrolling */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  position: relative;
+}
+
+html {
+  overscroll-behavior: none; /* Apply to html as well for better browser support */
 }
 
 /* Typography */
