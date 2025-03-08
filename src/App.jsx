@@ -8,6 +8,11 @@ import Footer from "./components/Footer/Footer";
 import Deliveries from "./components/Deliveries/Deliveries";
 import BookSearch from "./components/BookSearch/BookSearch";
 import AddBook from "./components/AddBook/AddBook";
+import RemoveEditBook from "./components/RemoveEditBook/RemoveEditBook";
+import MemberSearch from "./components/MemberSearch/MemberSearch";
+import AddMember from "./components/AddMember/AddMember";
+import RemoveMember from "./components/RemoveMember/RemoveMember";
+import HomePage from "./components/HomePage/HomePage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -62,30 +67,42 @@ function App() {
                 }
               />
               <Route
-                path="/"
+                path="/remove-edit-book"
                 element={
-                  <main className="main-content">
-                    <section className="hero-section">
-                      <h2>Welcome to Calgary Private Library</h2>
-                      <p>
-                        Discover our exclusive collection of books and resources
-                      </p>
-                      <button className="cta-button">Browse Catalog</button>
-                    </section>
-
-                    <section className="featured-section">
-                      <h3>Featured Books</h3>
-                      <div className="book-grid">
-                        {/* Placeholder for book items */}
-                        <div className="book-item">Book 1</div>
-                        <div className="book-item">Book 2</div>
-                        <div className="book-item">Book 3</div>
-                        <div className="book-item">Book 4</div>
-                      </div>
-                    </section>
-                  </main>
+                  !isLoggedIn ? (
+                    <Navigate to="/login" replace />
+                  ) : (
+                    <RemoveEditBook />
+                  )
                 }
               />
+              <Route
+                path="/member-search"
+                element={
+                  !isLoggedIn ? (
+                    <Navigate to="/login" replace />
+                  ) : (
+                    <MemberSearch />
+                  )
+                }
+              />
+              <Route
+                path="/add-member"
+                element={
+                  !isLoggedIn ? <Navigate to="/login" replace /> : <AddMember />
+                }
+              />
+              <Route
+                path="/remove-member"
+                element={
+                  !isLoggedIn ? (
+                    <Navigate to="/login" replace />
+                  ) : (
+                    <RemoveMember />
+                  )
+                }
+              />
+              <Route path="/" element={<HomePage />} />
             </Routes>
           </div>
         </div>

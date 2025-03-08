@@ -1,20 +1,24 @@
 import { useState } from "react";
-import { FaPlus, FaCheck, FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { FaPlus, FaCheck } from "react-icons/fa";
+import { addBook } from "../../services/BookService";
 import "./AddBook.css";
 
 function AddBook() {
+  const navigate = useNavigate();
+
   const [bookData, setBookData] = useState({
     title: "",
     author: "",
     genre: "",
     type: "",
     description: "",
+    isbn: "",
   });
-  const [coverImage, setCoverImage] = useState(null);
-  const [coverPreview, setCoverPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState("");
+  const [addedBook, setAddedBook] = useState(null);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -25,21 +29,8 @@ function AddBook() {
     });
   };
 
-  // Handle image upload
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setCoverImage(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCoverPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -51,11 +42,20 @@ function AddBook() {
     setIsSubmitting(true);
     setError("");
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Add the book with placeholder image
+      const newBook = await addBook({
+        ...bookData,
+        imageUrl: "/images/books/placeholder.jpg",
+      });
+
+      setAddedBook(newBook);
       setIsSubmitting(false);
       setShowConfirmation(true);
-    }, 1500);
+    } catch (err) {
+      setError("Failed to add book: " + err.message);
+      setIsSubmitting(false);
+    }
   };
 
   // Reset form after successful submission
@@ -66,10 +66,15 @@ function AddBook() {
       genre: "",
       type: "",
       description: "",
+      isbn: "",
     });
-    setCoverImage(null);
-    setCoverPreview(null);
     setShowConfirmation(false);
+    setAddedBook(null);
+  };
+
+  // Navigate to book search after adding
+  const goToBookSearch = () => {
+    navigate("/book-search");
   };
 
   // If showing confirmation screen
@@ -82,17 +87,24 @@ function AddBook() {
           <div className="confirmation-icon">
             <FaCheck />
           </div>
-          <h2>Confirmation</h2>
+          <h2>Book Added Successfully</h2>
           <p>
-            <strong>Book:</strong> {bookData.title}
+            <strong>Title:</strong> {addedBook.title}
             <br />
-            <strong>Category:</strong> {bookData.genre || "Not specified"}
+            <strong>Author:</strong> {addedBook.author}
             <br />
-            <strong>Has been added</strong>
+            <strong>Genre:</strong> {addedBook.genre || "Not specified"}
+            <br />
+            <strong>Type:</strong> {addedBook.type || "Not specified"}
           </p>
-          <button className="done-button" onClick={resetForm}>
-            Done
-          </button>
+          <div className="confirmation-buttons">
+            <button className="done-button" onClick={resetForm}>
+              <FaPlus /> Add Another Book
+            </button>
+            <button className="search-button" onClick={goToBookSearch}>
+              Go to Book Search
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -100,37 +112,20 @@ function AddBook() {
 
   return (
     <div className="add-book-container">
-      <h1 className="page-title">ADD BOOK</h1>
+      <h1 className="page-title">Add Book</h1>
 
       {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit} className="add-book-form">
         <div className="form-grid">
           <div className="cover-upload-section">
-            <div
-              className="cover-upload-area"
-              onClick={() => document.getElementById("cover-upload").click()}
-            >
-              {coverPreview ? (
-                <img
-                  src={coverPreview}
-                  alt="Book cover preview"
-                  className="cover-preview"
-                />
-              ) : (
-                <div className="upload-placeholder">
-                  <FaPlus />
-                  <p>Cover</p>
-                </div>
-              )}
+            <div className="cover-upload-area">
+              <div className="upload-placeholder">
+                <FaPlus />
+                <p>Cover</p>
+                <p className="small-text">(Placeholder will be used)</p>
+              </div>
             </div>
-            <input
-              type="file"
-              id="cover-upload"
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ display: "none" }}
-            />
           </div>
 
           <div className="book-details-section">
@@ -184,6 +179,19 @@ function AddBook() {
               </div>
             </div>
 
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="isbn">ISBN:</label>
+                <input
+                  type="text"
+                  id="isbn"
+                  name="isbn"
+                  value={bookData.isbn}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+
             <div className="form-group full-width">
               <label htmlFor="description">Description:</label>
               <textarea
@@ -199,7 +207,17 @@ function AddBook() {
 
         <div className="form-actions">
           <button type="submit" className="add-button" disabled={isSubmitting}>
-            {isSubmitting ? "Adding..." : "ADD"}
+            {isSubmitting ? (
+              <>
+                <span className="spinner"></span>
+                Adding...
+              </>
+            ) : (
+              <>
+                <FaPlus className="button-icon" />
+                Add Book
+              </>
+            )}
           </button>
         </div>
       </form>

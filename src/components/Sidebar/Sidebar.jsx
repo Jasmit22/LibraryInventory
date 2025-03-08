@@ -55,7 +55,7 @@ function Sidebar({ isLoggedIn }) {
             className="sidebar-header"
             onClick={() => toggleSection("inventory")}
           >
-            <h3>INVENTORY {expandedSections.inventory ? "▼" : "▶"}</h3>
+            <h3>Inventory {expandedSections.inventory ? "▼" : "▶"}</h3>
           </div>
           {expandedSections.inventory && (
             <ul className="sidebar-menu">
@@ -77,18 +77,10 @@ function Sidebar({ isLoggedIn }) {
               </li>
               <li>
                 <Link
-                  to="/remove-book"
+                  to="/remove-edit-book"
                   onClick={() => isMobile && setSidebarOpen(false)}
                 >
-                  Remove Book
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/analytics"
-                  onClick={() => isMobile && setSidebarOpen(false)}
-                >
-                  Analytics
+                  Remove/Edit Book
                 </Link>
               </li>
             </ul>
@@ -100,7 +92,7 @@ function Sidebar({ isLoggedIn }) {
             className="sidebar-header"
             onClick={() => toggleSection("users")}
           >
-            <h3>MANAGE USERS {expandedSections.users ? "▼" : "▶"}</h3>
+            <h3>Manage Users {expandedSections.users ? "▼" : "▶"}</h3>
           </div>
           {expandedSections.users && (
             <ul className="sidebar-menu">
@@ -137,7 +129,7 @@ function Sidebar({ isLoggedIn }) {
             className="sidebar-header"
             onClick={() => toggleSection("delivery")}
           >
-            <h3>DELIVERY {expandedSections.delivery ? "▼" : "▶"}</h3>
+            <h3>Delivery {expandedSections.delivery ? "▼" : "▶"}</h3>
           </div>
           {expandedSections.delivery && (
             <ul className="sidebar-menu">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
+import { getAllBooks, searchBooks } from "../../services/BookService";
 import "./BookSearch.css";
 
 function BookSearch() {
@@ -7,129 +8,41 @@ function BookSearch() {
   const [searchResults, setSearchResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Expanded mock data for demonstration
-  const mockBooks = [
-    {
-      id: 1,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      isbn: "9780743273565",
-      genre: "Classic",
-    },
-    {
-      id: 2,
-      title: "To Kill a Mockingbird",
-      author: "Harper Lee",
-      isbn: "9780061120084",
-      genre: "Fiction",
-    },
-    {
-      id: 3,
-      title: "1984",
-      author: "George Orwell",
-      isbn: "9780451524935",
-      genre: "Dystopian",
-    },
-    {
-      id: 4,
-      title: "Pride and Prejudice",
-      author: "Jane Austen",
-      isbn: "9780141439518",
-      genre: "Romance",
-    },
-    {
-      id: 5,
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
-      isbn: "9780547928227",
-      genre: "Fantasy",
-    },
-    {
-      id: 6,
-      title: "Harry Potter and the Sorcerer's Stone",
-      author: "J.K. Rowling",
-      isbn: "9780590353427",
-      genre: "Fantasy",
-    },
-    {
-      id: 7,
-      title: "The Catcher in the Rye",
-      author: "J.D. Salinger",
-      isbn: "9780316769488",
-      genre: "Fiction",
-    },
-    {
-      id: 8,
-      title: "The Lord of the Rings",
-      author: "J.R.R. Tolkien",
-      isbn: "9780618640157",
-      genre: "Fantasy",
-    },
-    {
-      id: 9,
-      title: "Brave New World",
-      author: "Aldous Huxley",
-      isbn: "9780060850524",
-      genre: "Dystopian",
-    },
-    {
-      id: 10,
-      title: "The Alchemist",
-      author: "Paulo Coelho",
-      isbn: "9780062315007",
-      genre: "Fiction",
-    },
-    {
-      id: 11,
-      title: "The Hunger Games",
-      author: "Suzanne Collins",
-      isbn: "9780439023481",
-      genre: "Dystopian",
-    },
-    {
-      id: 12,
-      title: "The Da Vinci Code",
-      author: "Dan Brown",
-      isbn: "9780307474278",
-      genre: "Thriller",
-    },
-  ];
-
-  // Load random books on initial render
+  // Load books on initial render
   useEffect(() => {
-    displayRandomBooks();
+    const fetchBooks = async () => {
+      setLoading(true);
+      try {
+        const books = await getAllBooks();
+        // Show some random books initially
+        const shuffled = [...books].sort(() => 0.5 - Math.random());
+        setSearchResults(shuffled.slice(0, 8));
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBooks();
   }, []);
 
-  // Function to display random books
-  const displayRandomBooks = () => {
-    // Shuffle the array and take the first 8 books
-    const shuffled = [...mockBooks].sort(() => 0.5 - Math.random());
-    setSearchResults(shuffled.slice(0, 8));
-    setHasSearched(false);
-  };
-
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (!searchQuery.trim()) {
-      // If search query is empty, show random books
-      displayRandomBooks();
-      return;
+    try {
+      const results = await searchBooks(searchQuery);
+      setSearchResults(results);
+      setHasSearched(true);
+      setSelectedBook(null);
+    } catch (error) {
+      console.error("Error searching books:", error);
+    } finally {
+      setLoading(false);
     }
-
-    // Filter books based on search query (case insensitive)
-    const results = mockBooks.filter(
-      (book) =>
-        book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        book.isbn.includes(searchQuery) ||
-        book.genre.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    setSearchResults(results);
-    setHasSearched(true);
-    setSelectedBook(null);
   };
 
   const handleBookClick = (book) => {
@@ -159,7 +72,9 @@ function BookSearch() {
       </div>
 
       <div className="search-results-container">
-        {hasSearched && searchResults.length === 0 ? (
+        {loading ? (
+          <p className="loading-message">Loading books...</p>
+        ) : hasSearched && searchResults.length === 0 ? (
           <p className="no-results">
             No books found matching your search criteria.
           </p>
@@ -177,7 +92,13 @@ function BookSearch() {
                   }`}
                   onClick={() => handleBookClick(book)}
                 >
-                  <div className="book-image-placeholder"></div>
+                  <div className="book-image-container">
+                    <img
+                      src={book.imageUrl}
+                      alt={book.title}
+                      className="book-image"
+                    />
+                  </div>
                   <div className="book-info">
                     <h3>{book.title}</h3>
                     <p>{book.author}</p>
@@ -195,18 +116,30 @@ function BookSearch() {
             <h2>{selectedBook.title}</h2>
             <div className="book-details-grid">
               <div className="book-cover">
-                <div className="book-image-placeholder large"></div>
+                <img
+                  src={selectedBook.imageUrl}
+                  alt={selectedBook.title}
+                  className="book-detail-image"
+                />
               </div>
               <div className="book-details">
                 <p>
                   <strong>Author:</strong> {selectedBook.author}
                 </p>
                 <p>
-                  <strong>ISBN:</strong> {selectedBook.isbn}
+                  <strong>ISBN:</strong> {selectedBook.isbn || "N/A"}
                 </p>
                 <p>
-                  <strong>Genre:</strong> {selectedBook.genre}
+                  <strong>Genre:</strong> {selectedBook.genre || "N/A"}
                 </p>
+                <p>
+                  <strong>Type:</strong> {selectedBook.type || "N/A"}
+                </p>
+                {selectedBook.description && (
+                  <p>
+                    <strong>Description:</strong> {selectedBook.description}
+                  </p>
+                )}
                 <p>
                   <strong>Status:</strong> Available
                 </p>
