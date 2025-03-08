@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Sidebar.css";
 
@@ -11,6 +11,7 @@ function Sidebar({ isLoggedIn }) {
   });
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,6 +64,9 @@ function Sidebar({ isLoggedIn }) {
                 <Link
                   to="/book-search"
                   onClick={() => isMobile && setSidebarOpen(false)}
+                  className={
+                    location.pathname === "/book-search" ? "active" : ""
+                  }
                 >
                   Book Search
                 </Link>
@@ -71,6 +75,7 @@ function Sidebar({ isLoggedIn }) {
                 <Link
                   to="/add-book"
                   onClick={() => isMobile && setSidebarOpen(false)}
+                  className={location.pathname === "/add-book" ? "active" : ""}
                 >
                   Add Book
                 </Link>
@@ -79,6 +84,9 @@ function Sidebar({ isLoggedIn }) {
                 <Link
                   to="/remove-edit-book"
                   onClick={() => isMobile && setSidebarOpen(false)}
+                  className={
+                    location.pathname === "/remove-edit-book" ? "active" : ""
+                  }
                 >
                   Remove/Edit Book
                 </Link>
@@ -100,6 +108,9 @@ function Sidebar({ isLoggedIn }) {
                 <Link
                   to="/member-search"
                   onClick={() => isMobile && setSidebarOpen(false)}
+                  className={
+                    location.pathname === "/member-search" ? "active" : ""
+                  }
                 >
                   Member Search
                 </Link>
@@ -108,6 +119,9 @@ function Sidebar({ isLoggedIn }) {
                 <Link
                   to="/add-member"
                   onClick={() => isMobile && setSidebarOpen(false)}
+                  className={
+                    location.pathname === "/add-member" ? "active" : ""
+                  }
                 >
                   Add Member
                 </Link>
@@ -116,6 +130,9 @@ function Sidebar({ isLoggedIn }) {
                 <Link
                   to="/remove-member"
                   onClick={() => isMobile && setSidebarOpen(false)}
+                  className={
+                    location.pathname === "/remove-member" ? "active" : ""
+                  }
                 >
                   Remove Member
                 </Link>
@@ -137,6 +154,9 @@ function Sidebar({ isLoggedIn }) {
                 <Link
                   to="/deliveries"
                   onClick={() => isMobile && setSidebarOpen(false)}
+                  className={
+                    location.pathname === "/deliveries" ? "active" : ""
+                  }
                 >
                   View Incoming/Outgoing Deliveries
                 </Link>

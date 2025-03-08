@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
@@ -15,7 +15,15 @@ import RemoveMember from "./components/RemoveMember/RemoveMember";
 import HomePage from "./components/HomePage/HomePage";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Initialize state from localStorage
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem("isLoggedIn") === "true";
+  });
+
+  // Update localStorage when isLoggedIn changes
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isLoggedIn);
+  }, [isLoggedIn]);
 
   return (
     <BrowserRouter>

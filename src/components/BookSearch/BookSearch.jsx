@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
 import { getAllBooks, searchBooks } from "../../services/BookService";
 import "./BookSearch.css";
 
@@ -112,9 +112,20 @@ function BookSearch() {
       </div>
 
       {selectedBook && (
-        <div className="book-details-modal">
-          <div className="modal-content">
-            <h2>{selectedBook.title}</h2>
+        <div
+          className="book-details-modal"
+          onClick={() => setSelectedBook(null)}
+        >
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{selectedBook.title}</h2>
+              <button
+                className="close-modal-button"
+                onClick={() => setSelectedBook(null)}
+              >
+                <FaTimes />
+              </button>
+            </div>
             <div className="book-details-grid">
               <div className="book-cover">
                 <img
@@ -124,38 +135,47 @@ function BookSearch() {
                 />
               </div>
               <div className="book-details">
-                <p>
-                  <strong>Author:</strong> {selectedBook.author}
-                </p>
-                <p>
-                  <strong>ISBN:</strong> {selectedBook.isbn || "N/A"}
-                </p>
-                <p>
-                  <strong>Genre:</strong> {selectedBook.genre || "N/A"}
-                </p>
-                <p>
-                  <strong>Type:</strong> {selectedBook.type || "N/A"}
-                </p>
-                {selectedBook.description && (
-                  <p>
-                    <strong>Description:</strong> {selectedBook.description}
-                  </p>
-                )}
-                <p>
-                  <strong>Status:</strong> Available
-                </p>
-                <div className="book-actions">
-                  <button className="action-button">Reserve</button>
-                  <button className="action-button">Check Out</button>
+                <div className="detail-item">
+                  <span className="detail-label">Author:</span>
+                  <span className="detail-value">{selectedBook.author}</span>
                 </div>
+
+                <div className="detail-item">
+                  <span className="detail-label">ISBN:</span>
+                  <span className="detail-value">
+                    {selectedBook.isbn || "N/A"}
+                  </span>
+                </div>
+
+                <div className="detail-item">
+                  <span className="detail-label">Genre:</span>
+                  <span className="detail-value">
+                    {selectedBook.genre || "N/A"}
+                  </span>
+                </div>
+
+                <div className="detail-item">
+                  <span className="detail-label">Type:</span>
+                  <span className="detail-value">
+                    {selectedBook.type || "N/A"}
+                  </span>
+                </div>
+
+                <div className="detail-item">
+                  <span className="detail-label">Status:</span>
+                  <span className="detail-value status-available">
+                    Available
+                  </span>
+                </div>
+
+                {selectedBook.description && (
+                  <div className="detail-item description">
+                    <span className="detail-label">Description:</span>
+                    <p className="detail-value">{selectedBook.description}</p>
+                  </div>
+                )}
               </div>
             </div>
-            <button
-              className="close-modal-button"
-              onClick={() => setSelectedBook(null)}
-            >
-              Close
-            </button>
           </div>
         </div>
       )}

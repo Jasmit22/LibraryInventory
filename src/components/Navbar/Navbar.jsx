@@ -7,8 +7,9 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
   // Function to handle login/logout button click
   const handleAuthClick = () => {
     if (isLoggedIn) {
-      // If logged in, log out
+      // If logged in, log out and clear localStorage
       setIsLoggedIn(false);
+      localStorage.removeItem("isLoggedIn");
     } else {
       // If not logged in, navigate to login page
       navigate("/login");
