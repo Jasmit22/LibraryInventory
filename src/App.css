@@ -1,42 +1,116 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* General Styles */
+body {
+  font-family: "Mona Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #f5f5f5;
+  width: 100%;
+}
+
+.library-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Login container should also flex to fill space */
+.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.hero-section {
   text-align: center;
+  padding: 3rem 1rem;
+  background-color: #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 2rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.hero-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  font-stretch: 110%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cta-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #1a365d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.cta-button:hover {
+  background-color: #2a4365;
 }
 
-.card {
-  padding: 2em;
+.featured-section {
+  margin-top: 2rem;
 }
 
-.read-the-docs {
-  color: #888;
+.featured-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.book-item {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #1a365d;
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  color: #e2e8f0;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
 }

@@ -1,0 +1,88 @@
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1a365d;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700; /* Using a bolder weight for the logo */
+}
+
+.logo-text {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.logo-text:hover {
+  opacity: 0.9;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #e2e8f0;
+}
+
+.navbar-search {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.navbar-search input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.navbar-search button {
+  padding: 0.5rem 1rem;
+  background-color: #4a5568;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.navbar-search button:hover {
+  background-color: #2d3748;
+}
+
+.navbar-auth {
+  display: flex;
+  align-items: center;
+}
+
+.auth-button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.auth-button:hover {
+  background-color: white;
+  color: #1a365d;
+}
