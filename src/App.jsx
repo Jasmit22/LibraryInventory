@@ -97,7 +97,11 @@ function App() {
               <Route
                 path="/add-member"
                 element={
-                  !isLoggedIn ? <Navigate to="/login" replace /> : <AddMember />
+                  !isLoggedIn ? (
+                    <Navigate to="/login" replace /> 
+                  ) : (
+                   <AddMember />
+                  )
                 }
               />
               <Route
