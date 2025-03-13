@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@gmail.com",
+    "phone": "1234567890",
+    "address": "123 Street"
+  },
+  {
+    "id": 2,
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "jane.doe@gmail.com",
+    "phone": null,
+    "address": null
+  },
+  {
+    "id": 3,
+    "firstName": "Benny",
+    "lastName": "Lee",
+    "email": "blee@gmail.com",
+    "phone": "5875858506",
+    "address": null
+  },
+  {
+    "id": 4,
+    "firstName": "Penn",
+    "lastName": "Pall",
+    "email": "pall_penn57@gmail.com",
+    "phone": "5873546273",
+    "address": null
+  },
+  {
+    "id": 5,
+    "firstName": "Ted",
+    "lastName": "Dee",
+    "email": "tdbear@gmail.com",
+    "phone": null,
+    "address": null
+  }
+]

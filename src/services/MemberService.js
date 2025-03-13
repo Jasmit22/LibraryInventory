@@ -4,7 +4,7 @@
 let membersData = null;
 
 // Load members from JSON file
-async function loadMembers() {
+const loadMembers = async () => {
     if (membersData) return membersData;
 
     try {
