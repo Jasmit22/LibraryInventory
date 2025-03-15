@@ -7,10 +7,19 @@
     "genre": "Classic",
     "type": "Hardcover",
     "description": "A novel of the Jazz Age that follows the life of mysterious millionaire Jay Gatsby.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/the-great-gatsby.jpg",
     "expectedArrival": "2023-12-15",
     "origin": "Publisher A",
-    "destination": null
+    "destination": null,
+    "status": "On Schedule",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 3,
+      "availableCopies": 0,
+      "checkedOutCopies": 3,
+      "waitlistCount": 2,
+      "lastCheckedOut": "2023-11-28"
+    }
   },
   {
     "id": 2,
@@ -20,10 +29,18 @@
     "genre": "Fiction",
     "type": "Paperback",
     "description": "The story of racial injustice and the loss of innocence in the American South.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/to-kill-a-mockingbird.jpg",
     "expectedArrival": null,
     "origin": null,
-    "destination": null
+    "destination": null,
+    "isAvailable": true,
+    "inventory": {
+      "totalCopies": 5,
+      "availableCopies": 2,
+      "checkedOutCopies": 3,
+      "waitlistCount": 0,
+      "lastCheckedOut": "2023-12-01"
+    }
   },
   {
     "id": 3,
@@ -33,10 +50,19 @@
     "genre": "Dystopian",
     "type": "Paperback",
     "description": "A dystopian social science fiction novel that examines the consequences of totalitarianism.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/1984.jpg",
     "expectedArrival": "2023-12-17",
     "origin": "Publisher C",
-    "destination": null
+    "destination": null,
+    "status": "Delayed",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 4,
+      "availableCopies": 0,
+      "checkedOutCopies": 4,
+      "waitlistCount": 3,
+      "lastCheckedOut": "2023-12-05"
+    }
   },
   {
     "id": 4,
@@ -46,10 +72,18 @@
     "genre": "Romance",
     "type": "Hardcover",
     "description": "A romantic novel of manners that follows the character development of Elizabeth Bennet.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/pride-and-prejudice.jpg",
     "expectedArrival": null,
     "origin": null,
-    "destination": null
+    "destination": null,
+    "isAvailable": true,
+    "inventory": {
+      "totalCopies": 6,
+      "availableCopies": 3,
+      "checkedOutCopies": 3,
+      "waitlistCount": 0,
+      "lastCheckedOut": "2023-11-25"
+    }
   },
   {
     "id": 5,
@@ -59,10 +93,19 @@
     "genre": "Fantasy",
     "type": "Hardcover",
     "description": "A fantasy novel about the adventures of hobbit Bilbo Baggins.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/the-hobbit.jpg",
     "expectedArrival": "2023-12-20",
     "origin": null,
-    "destination": "Member A"
+    "destination": "Member A",
+    "status": "In Transit",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 4,
+      "availableCopies": 0,
+      "checkedOutCopies": 4,
+      "waitlistCount": 5,
+      "lastCheckedOut": "2023-12-03"
+    }
   },
   {
     "id": 6,
@@ -72,10 +115,19 @@
     "genre": "Fantasy",
     "type": "Hardcover",
     "description": "The first novel in the Harry Potter series, introducing the young wizard Harry Potter.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/harry-potter.jpg",
     "expectedArrival": "2023-12-18",
     "origin": null,
-    "destination": "Member B"
+    "destination": "Member B",
+    "status": "Delayed",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 8,
+      "availableCopies": 0,
+      "checkedOutCopies": 8,
+      "waitlistCount": 7,
+      "lastCheckedOut": "2023-12-07"
+    }
   },
   {
     "id": 7,
@@ -85,10 +137,18 @@
     "genre": "Fiction",
     "type": "Paperback",
     "description": "A novel about the experiences of a teenager, Holden Caulfield, in New York City.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/the-catcher-in-the-rye.jpg",
     "expectedArrival": null,
     "origin": null,
-    "destination": null
+    "destination": null,
+    "isAvailable": true,
+    "inventory": {
+      "totalCopies": 3,
+      "availableCopies": 1,
+      "checkedOutCopies": 2,
+      "waitlistCount": 0,
+      "lastCheckedOut": "2023-11-30"
+    }
   },
   {
     "id": 8,
@@ -98,10 +158,19 @@
     "genre": "Fantasy",
     "type": "Hardcover",
     "description": "An epic high-fantasy novel that follows the quest to destroy the One Ring.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/the-lord-of-the-rings.jpg",
     "expectedArrival": "2023-12-22",
     "origin": null,
-    "destination": "Member C"
+    "destination": "Member C",
+    "status": "Delivered",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 5,
+      "availableCopies": 0,
+      "checkedOutCopies": 5,
+      "waitlistCount": 4,
+      "lastCheckedOut": "2023-12-02"
+    }
   },
   {
     "id": 9,
@@ -111,10 +180,19 @@
     "genre": "Dystopian",
     "type": "Paperback",
     "description": "A dystopian novel set in a futuristic World State of genetically modified citizens.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/brave-new-world.jpg",
     "expectedArrival": "2023-12-16",
     "origin": "Publisher B",
-    "destination": null
+    "destination": null,
+    "status": "Arrived",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 3,
+      "availableCopies": 0,
+      "checkedOutCopies": 3,
+      "waitlistCount": 1,
+      "lastCheckedOut": "2023-11-29"
+    }
   },
   {
     "id": 10,
@@ -124,9 +202,17 @@
     "genre": "Fiction",
     "type": "Paperback",
     "description": "A novel about the journey of a young Andalusian shepherd boy named Santiago.",
-    "imageUrl": "/images/books/placeholder.jpg",
+    "imageUrl": "/images/books/the-alchemist.jpg",
     "expectedArrival": null,
     "origin": null,
-    "destination": null
+    "destination": null,
+    "isAvailable": true,
+    "inventory": {
+      "totalCopies": 4,
+      "availableCopies": 2,
+      "checkedOutCopies": 2,
+      "waitlistCount": 0,
+      "lastCheckedOut": "2023-12-04"
+    }
   }
 ]
