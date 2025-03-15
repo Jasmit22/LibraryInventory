@@ -211,6 +211,7 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .done-button,
@@ -243,6 +244,25 @@
 
 .search-button:hover {
   background-color: #2d3748;
+  transform: translateY(-2px);
+}
+
+.edit-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.edit-button:hover {
+  background-color: #2b6cb0;
   transform: translateY(-2px);
 }
 
@@ -323,5 +343,86 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* ISBN Lookup Section */
+.isbn-lookup-section {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border-left: 4px solid #3182ce;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.isbn-lookup-form {
+  display: flex;
+  width: 100%;
+}
+
+.isbn-input-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.isbn-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.isbn-input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+  outline: none;
+}
+
+.isbn-lookup-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-weight: 600;
+  min-width: 120px;
+}
+
+.isbn-lookup-button:hover:not(:disabled) {
+  background-color: #2b6cb0;
+  transform: translateY(-2px);
+}
+
+.isbn-lookup-button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .isbn-input-wrapper {
+    flex-direction: column;
+  }
+
+  .isbn-lookup-button {
+    width: 100%;
   }
 }

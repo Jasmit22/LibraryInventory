@@ -1,71 +1,182 @@
+.hero-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #f7fafc;
+  border-radius: 12px;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.hero-section h2 {
+  font-size: 2.75rem;
+  margin-bottom: 1.25rem;
+  font-weight: 800;
+  font-stretch: 110%;
+  color: #1a365d;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+
+.cta-button {
+  padding: 0.85rem 2rem;
+  background-color: #1a365d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.cta-button:hover {
+  background-color: #2a4365;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26, 54, 93, 0.2);
+}
+
+.featured-section {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.featured-section h3 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #1a365d;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.featured-section h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #3182ce;
+  border-radius: 2px;
+}
+
 .book-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2.5rem;
 }
 
 .book-item {
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: none;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: none;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s ease;
 }
 
 .book-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
 }
 
 .book-cover {
   width: 100%;
-  height: 180px;
-  margin-bottom: 1rem;
+  height: 220px;
+  margin-bottom: 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  border-radius: 12px;
+  background-color: #f7fafc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.book-item:hover .book-cover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .book-cover-image {
-  max-width: 100%;
-  max-height: 180px;
+  max-width: 85%;
+  max-height: 85%;
   object-fit: contain;
-  width: auto;
-  height: auto;
+  transition: all 0.3s ease;
+}
+
+.book-item:hover .book-cover-image {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.book-info {
+  padding: 0.5rem;
 }
 
 .book-info h4 {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
-  color: #1a365d;
+  color: #2d3748;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .book-info p {
-  font-size: 0.9rem;
-  color: #4a5568;
+  font-size: 0.95rem;
+  color: #718096;
   margin-bottom: 0;
+  line-height: 1.4;
 }
 
 .loading-message {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
   font-size: 1.1rem;
   color: #4a5568;
 }
 
 @media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-section h2 {
+    font-size: 2.25rem;
+  }
+
   .book-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .book-cover {
+    height: 180px;
   }
 }
 
 @media (max-width: 480px) {
+  .hero-section h2 {
+    font-size: 1.75rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
   .book-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .book-cover {
+    height: 160px;
   }
 }

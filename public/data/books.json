@@ -10,7 +10,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": "2023-12-15",
     "origin": "Publisher A",
-    "destination": null
+    "destination": null,
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 3,
+      "availableCopies": 0,
+      "checkedOutCopies": 3,
+      "waitlistCount": 2,
+      "lastCheckedOut": "2023-11-28"
+    }
   },
   {
     "id": 2,
@@ -23,7 +31,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": null,
     "origin": null,
-    "destination": null
+    "destination": null,
+    "isAvailable": true,
+    "inventory": {
+      "totalCopies": 5,
+      "availableCopies": 2,
+      "checkedOutCopies": 3,
+      "waitlistCount": 0,
+      "lastCheckedOut": "2023-12-01"
+    }
   },
   {
     "id": 3,
@@ -36,7 +52,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": "2023-12-17",
     "origin": "Publisher C",
-    "destination": null
+    "destination": null,
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 4,
+      "availableCopies": 0,
+      "checkedOutCopies": 4,
+      "waitlistCount": 3,
+      "lastCheckedOut": "2023-12-05"
+    }
   },
   {
     "id": 4,
@@ -49,7 +73,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": null,
     "origin": null,
-    "destination": null
+    "destination": null,
+    "isAvailable": true,
+    "inventory": {
+      "totalCopies": 6,
+      "availableCopies": 3,
+      "checkedOutCopies": 3,
+      "waitlistCount": 0,
+      "lastCheckedOut": "2023-11-25"
+    }
   },
   {
     "id": 5,
@@ -62,7 +94,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": "2023-12-20",
     "origin": null,
-    "destination": "Member A"
+    "destination": "Member A",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 4,
+      "availableCopies": 0,
+      "checkedOutCopies": 4,
+      "waitlistCount": 5,
+      "lastCheckedOut": "2023-12-03"
+    }
   },
   {
     "id": 6,
@@ -75,7 +115,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": "2023-12-18",
     "origin": null,
-    "destination": "Member B"
+    "destination": "Member B",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 8,
+      "availableCopies": 0,
+      "checkedOutCopies": 8,
+      "waitlistCount": 7,
+      "lastCheckedOut": "2023-12-07"
+    }
   },
   {
     "id": 7,
@@ -88,7 +136,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": null,
     "origin": null,
-    "destination": null
+    "destination": null,
+    "isAvailable": true,
+    "inventory": {
+      "totalCopies": 3,
+      "availableCopies": 1,
+      "checkedOutCopies": 2,
+      "waitlistCount": 0,
+      "lastCheckedOut": "2023-11-30"
+    }
   },
   {
     "id": 8,
@@ -101,7 +157,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": "2023-12-22",
     "origin": null,
-    "destination": "Member C"
+    "destination": "Member C",
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 5,
+      "availableCopies": 0,
+      "checkedOutCopies": 5,
+      "waitlistCount": 4,
+      "lastCheckedOut": "2023-12-02"
+    }
   },
   {
     "id": 9,
@@ -114,7 +178,15 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": "2023-12-16",
     "origin": "Publisher B",
-    "destination": null
+    "destination": null,
+    "isAvailable": false,
+    "inventory": {
+      "totalCopies": 3,
+      "availableCopies": 0,
+      "checkedOutCopies": 3,
+      "waitlistCount": 1,
+      "lastCheckedOut": "2023-11-29"
+    }
   },
   {
     "id": 10,
@@ -127,6 +199,14 @@
     "imageUrl": "/images/books/placeholder.jpg",
     "expectedArrival": null,
     "origin": null,
-    "destination": null
+    "destination": null,
+    "isAvailable": true,
+    "inventory": {
+      "totalCopies": 4,
+      "availableCopies": 2,
+      "checkedOutCopies": 2,
+      "waitlistCount": 0,
+      "lastCheckedOut": "2023-12-04"
+    }
   }
 ]

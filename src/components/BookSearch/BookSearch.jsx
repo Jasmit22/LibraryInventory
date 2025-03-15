@@ -72,7 +72,7 @@ function BookSearch() {
         </form>
       </div>
 
-      <div className="search-results-container">
+      <div>
         {loading ? (
           <p className="loading-message">Loading books...</p>
         ) : hasSearched && searchResults.length === 0 ? (
@@ -103,6 +103,13 @@ function BookSearch() {
                   <div className="book-info">
                     <h3>{book.title}</h3>
                     <p>{book.author}</p>
+                    <span
+                      className={`availability-badge ${
+                        book.isAvailable ? "available" : "unavailable"
+                      }`}
+                    >
+                      {book.isAvailable ? "Available" : "Unavailable"}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -163,9 +170,51 @@ function BookSearch() {
 
                 <div className="detail-item">
                   <span className="detail-label">Status:</span>
-                  <span className="detail-value status-available">
-                    Available
+                  <span
+                    className={`detail-value ${
+                      selectedBook.isAvailable
+                        ? "status-available"
+                        : "status-unavailable"
+                    }`}
+                  >
+                    {selectedBook.isAvailable ? "Available" : "Unavailable"}
                   </span>
+                </div>
+
+                <div className="detail-item">
+                  <span className="detail-label">Inventory:</span>
+                  <div className="inventory-details">
+                    <div className="inventory-stat">
+                      <span className="inventory-label">Total Copies:</span>
+                      <span className="inventory-value">
+                        {selectedBook.inventory?.totalCopies || 0}
+                      </span>
+                    </div>
+                    <div className="inventory-stat">
+                      <span className="inventory-label">Available:</span>
+                      <span className="inventory-value">
+                        {selectedBook.inventory?.availableCopies || 0}
+                      </span>
+                    </div>
+                    <div className="inventory-stat">
+                      <span className="inventory-label">Checked Out:</span>
+                      <span className="inventory-value">
+                        {selectedBook.inventory?.checkedOutCopies || 0}
+                      </span>
+                    </div>
+                    <div className="inventory-stat">
+                      <span className="inventory-label">Waitlist:</span>
+                      <span className="inventory-value">
+                        {selectedBook.inventory?.waitlistCount || 0}
+                      </span>
+                    </div>
+                    <div className="inventory-stat">
+                      <span className="inventory-label">Last Checked Out:</span>
+                      <span className="inventory-value">
+                        {selectedBook.inventory?.lastCheckedOut || "N/A"}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 {selectedBook.description && (

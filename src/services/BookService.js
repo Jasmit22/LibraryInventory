@@ -87,3 +87,29 @@ export const getOutgoingDeliveries = async () => {
     (book) => book.expectedArrival && book.destination && !book.origin
   );
 };
+
+// Lookup book by ISBN
+export const lookupBookByISBN = async (isbn) => {
+  try {
+    const response = await fetch("/data/isbn-lookup.json");
+    if (!response.ok) {
+      throw new Error("Failed to fetch ISBN data");
+    }
+    const data = await response.json();
+
+    // Return the book data for the ISBN or the default if not found
+    return data[isbn] || data["default"];
+  } catch (error) {
+    console.error("Error looking up ISBN:", error);
+    // Return the default book as fallback
+    return {
+      title: "The Midnight Library",
+      author: "Matt Haig",
+      genre: "Fiction",
+      type: "Hardcover",
+      description:
+        "Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived.",
+      isbn: "9780525559474",
+    };
+  }
+};
