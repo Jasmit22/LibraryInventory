@@ -114,12 +114,12 @@
 
 /* Improve the active link styling */
 .sidebar-menu a.active {
-  background-color: #3182ce;
+  background-color: #88bbeb;
   color: white;
   font-weight: 600;
 }
 
 .sidebar-menu a.active:hover {
-  background-color: #4299e1;
+  background-color: #a8cef2;
   color: white;
 }
