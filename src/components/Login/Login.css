@@ -57,6 +57,15 @@
   margin-top: 1rem;
 }
 
+.forgot-password {
+  color: #3182ce;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+
 .login-button:hover {
   background-color: #2a4365;
 }
@@ -65,4 +74,90 @@
   color: #e53e3e;
   text-align: center;
   margin-bottom: 1rem;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+  font-size: 0.95rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.modal-submit {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.modal-submit:hover {
+  background-color: #2b6cb0;
+}
+
+.modal-link {
+  color: #3182ce;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.modal-logo {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+}
+
+.modal-error {
+  color: #e53e3e;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.highlighted-email {
+  font-weight: bold;
+  color: #1a365d;
 }
