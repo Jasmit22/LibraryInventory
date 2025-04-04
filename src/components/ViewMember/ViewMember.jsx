@@ -7,6 +7,8 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import { getAllMembers } from "../../services/MemberService";
+import Modal from "../common/Modal/Modal";
+import MemberDetailsContent from "./MemberDetailsContent";
 import "./ViewMember.css";
 
 function ViewMember() {
@@ -18,6 +20,7 @@ function ViewMember() {
   const [loading, setLoading] = useState(true);
   const [sortField, setSortField] = useState("id");
   const [sortDirection, setSortDirection] = useState("asc");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -84,6 +87,11 @@ function ViewMember() {
 
   const handleMemberClick = (member) => {
     setSelectedMember(member);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const handleSort = (field) => {
@@ -231,175 +239,15 @@ function ViewMember() {
         )}
       </div>
 
-      {/* Member Details Modal */}
-      {selectedMember && (
-        <div
-          className="member-details-modal"
-          onClick={() => setSelectedMember(null)}
-        >
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Member Details</h2>
-              <button
-                className="close-modal-button"
-                onClick={() => setSelectedMember(null)}
-              >
-                <FaTimes />
-              </button>
-            </div>
-            <div className="member-details-grid">
-              <div className="member-details">
-                <div className="member-details-column">
-                  <h2>Personal Information</h2>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Full Name</span>
-                    <span className="detail-value">
-                      {selectedMember.firstName} {selectedMember.lastName}
-                    </span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Member ID</span>
-                    <span className="detail-value">{selectedMember.id}</span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Email</span>
-                    <span className="detail-value">{selectedMember.email}</span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Phone</span>
-                    <span className="detail-value">
-                      {selectedMember.phone || (
-                        <span className="empty-state">Not provided</span>
-                      )}
-                    </span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Address</span>
-                    <span className="detail-value">
-                      {selectedMember.address || (
-                        <span className="empty-state">Not provided</span>
-                      )}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="loans-column">
-                  <h2>
-                    <FaBook style={{ marginRight: "0.5rem" }} />
-                    Currently Borrowed
-                  </h2>
-
-                  {!selectedMember.isBorrowing ? (
-                    <span className="empty-state">
-                      No books currently borrowed
-                    </span>
-                  ) : (
-                    <>
-                      <div className="book-cover">
-                        <img
-                          src={selectedMember.borrowed?.imageUrl}
-                          alt={selectedMember.borrowed?.title}
-                          className="book-detail-image"
-                        />
-                      </div>
-
-                      <div className="book-details">
-                        <div className="detail-item">
-                          <span className="detail-label">Title</span>
-                          <span className="detail-value">
-                            {selectedMember.borrowed?.title}
-                          </span>
-                        </div>
-
-                        <div className="detail-item">
-                          <span className="detail-label">Author</span>
-                          <span className="detail-value">
-                            {selectedMember.borrowed?.author}
-                          </span>
-                        </div>
-
-                        <div className="detail-item">
-                          <span className="detail-label">ISBN</span>
-                          <span className="detail-value">
-                            {selectedMember.borrowed?.isbn}
-                          </span>
-                        </div>
-
-                        <div className="detail-item">
-                          <span className="detail-label">Due Date</span>
-                          <span className="detail-value status-available">
-                            <FaCalendarAlt style={{ marginRight: "0.5rem" }} />
-                            {selectedMember.borrowed?.status}
-                          </span>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                <div className="loans-column">
-                  <h2>
-                    <FaBook style={{ marginRight: "0.5rem" }} />
-                    On Hold
-                  </h2>
-
-                  {!selectedMember.isHolding ? (
-                    <span className="empty-state">
-                      No books currently on hold
-                    </span>
-                  ) : (
-                    <>
-                      <div className="book-cover">
-                        <img
-                          src={selectedMember.holds?.imageUrl}
-                          alt={selectedMember.holds?.title}
-                          className="book-detail-image"
-                        />
-                      </div>
-
-                      <div className="book-details">
-                        <div className="detail-item">
-                          <span className="detail-label">Title</span>
-                          <span className="detail-value">
-                            {selectedMember.holds?.title}
-                          </span>
-                        </div>
-
-                        <div className="detail-item">
-                          <span className="detail-label">Author</span>
-                          <span className="detail-value">
-                            {selectedMember.holds?.author}
-                          </span>
-                        </div>
-
-                        <div className="detail-item">
-                          <span className="detail-label">ISBN</span>
-                          <span className="detail-value">
-                            {selectedMember.holds?.isbn}
-                          </span>
-                        </div>
-
-                        <div className="detail-item">
-                          <span className="detail-label">Wait Time</span>
-                          <span className="detail-value status-unavailable">
-                            <FaCalendarAlt style={{ marginRight: "0.5rem" }} />
-                            {selectedMember.holds?.status}
-                          </span>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Member Details Modal - Using common Modal component */}
+      <Modal
+        isOpen={isModalOpen && selectedMember !== null}
+        onClose={handleCloseModal}
+        title="Member Details"
+        size="xlarge"
+      >
+        {selectedMember && <MemberDetailsContent member={selectedMember} />}
+      </Modal>
     </div>
   );
 }

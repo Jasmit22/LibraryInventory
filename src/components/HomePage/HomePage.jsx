@@ -1,61 +1,113 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getFeaturedBooks } from "../../services/BookService";
+import { FaArrowRight, FaSearch, FaUsers } from "react-icons/fa";
 import "./HomePage.css";
 
 function HomePage() {
-  const [featuredBooks, setFeaturedBooks] = useState([]);
+  const [newBooks, setNewBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loadFeaturedBooks = async () => {
+    const loadNewBooks = async () => {
       setLoading(true);
       try {
-        const books = await getFeaturedBooks(4);
-        setFeaturedBooks(books);
+        // We're still using getFeaturedBooks but will display them as "New Books"
+        const books = await getFeaturedBooks(6);
+        setNewBooks(books);
       } catch (error) {
-        console.error("Error loading featured books:", error);
+        console.error("Error loading new books:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    loadFeaturedBooks();
+    loadNewBooks();
   }, []);
 
-  const handleBrowseClick = () => {
+  const handleBookSearchClick = () => {
     navigate("/book-search");
   };
 
+  const handleViewMembersClick = () => {
+    navigate("/view-member");
+  };
+
+  const handleBookClick = (bookId) => {
+    navigate(`/book-search?id=${bookId}`);
+  };
+
   return (
-    <main className="main-content">
+    <main className="home-content">
       <section className="hero-section">
-        <h2>Welcome to Calgary Private Library</h2>
-        <p>Discover our exclusive collection of books and resources</p>
-        <button className="cta-button" onClick={handleBrowseClick}>
-          Browse Catalog
-        </button>
+        <div className="hero-overlay">
+          <div className="hero-content">
+            <h1>Calgary Private Library</h1>
+            <p className="hero-subtitle">
+              Manage your library's collection and members with ease
+            </p>
+            <div className="hero-buttons">
+              <button
+                className="primary-button"
+                onClick={handleBookSearchClick}
+              >
+                <FaSearch className="button-icon" />
+                Book Search
+              </button>
+              <button
+                className="secondary-button"
+                onClick={handleViewMembersClick}
+              >
+                <FaUsers className="button-icon" />
+                View Members
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="featured-section">
-        <h3>Featured Books</h3>
+      <section className="new-books-section">
+        <div className="section-header">
+          <h2>New Books</h2>
+          <button className="view-all-button" onClick={handleBookSearchClick}>
+            View All <FaArrowRight />
+          </button>
+        </div>
+
         {loading ? (
-          <p className="loading-message">Loading featured books...</p>
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Loading new books...</p>
+          </div>
         ) : (
-          <div className="book-grid">
-            {featuredBooks.map((book) => (
-              <div key={book.id} className="book-item">
-                <div className="book-cover">
+          <div className="books-showcase">
+            {newBooks.map((book) => (
+              <div
+                key={book.id}
+                className="book-card"
+                onClick={() => handleBookClick(book.id)}
+              >
+                <div className="book-cover-container">
                   <img
                     src={book.imageUrl}
                     alt={book.title}
                     className="book-cover-image"
                   />
+                  <div className="book-hover-info">
+                    <span className="view-details">View Details</span>
+                  </div>
                 </div>
                 <div className="book-info">
-                  <h4>{book.title}</h4>
-                  <p>{book.author}</p>
+                  <h3 className="book-title">{book.title}</h3>
+                  <p className="book-author">by {book.author}</p>
+                  <span
+                    className={`book-status ${
+                      book.isAvailable ? "available" : "unavailable"
+                    }`}
+                  >
+                    {book.isAvailable ? "Available" : "Unavailable"}
+                  </span>
                 </div>
               </div>
             ))}

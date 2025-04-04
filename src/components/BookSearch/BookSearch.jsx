@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { getAllBooks, searchBooks } from "../../services/BookService";
+import BookDetailsModal from "./BookDetailsModal";
 import "./BookSearch.css";
 
 function BookSearch() {
@@ -9,6 +10,7 @@ function BookSearch() {
   const [hasSearched, setHasSearched] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Load books on initial render
   useEffect(() => {
@@ -47,6 +49,11 @@ function BookSearch() {
 
   const handleBookClick = (book) => {
     setSelectedBook(book);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -117,116 +124,11 @@ function BookSearch() {
         )}
       </div>
 
-      {selectedBook && (
-        <div
-          className="book-details-modal"
-          onClick={() => setSelectedBook(null)}
-        >
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>{selectedBook.title}</h2>
-              <button
-                className="close-modal-button"
-                onClick={() => setSelectedBook(null)}
-              >
-                <FaTimes />
-              </button>
-            </div>
-            <div className="book-details-grid">
-              <div className="book-cover">
-                <img
-                  src={selectedBook.imageUrl}
-                  alt={selectedBook.title}
-                  className="book-detail-image"
-                />
-              </div>
-              <div className="book-details">
-                <div className="detail-item">
-                  <span className="detail-label">Author:</span>
-                  <span className="detail-value">{selectedBook.author}</span>
-                </div>
-
-                <div className="detail-item">
-                  <span className="detail-label">ISBN:</span>
-                  <span className="detail-value">
-                    {selectedBook.isbn || "N/A"}
-                  </span>
-                </div>
-
-                <div className="detail-item">
-                  <span className="detail-label">Genre:</span>
-                  <span className="detail-value">
-                    {selectedBook.genre || "N/A"}
-                  </span>
-                </div>
-
-                <div className="detail-item">
-                  <span className="detail-label">Type:</span>
-                  <span className="detail-value">
-                    {selectedBook.type || "N/A"}
-                  </span>
-                </div>
-
-                <div className="detail-item">
-                  <span className="detail-label">Status:</span>
-                  <span
-                    className={`detail-value ${
-                      selectedBook.isAvailable
-                        ? "status-available"
-                        : "status-unavailable"
-                    }`}
-                  >
-                    {selectedBook.isAvailable ? "Available" : "Unavailable"}
-                  </span>
-                </div>
-
-                <div className="detail-item">
-                  <span className="detail-label">Inventory:</span>
-                  <div className="inventory-details">
-                    <div className="inventory-stat">
-                      <span className="inventory-label">Total Copies:</span>
-                      <span className="inventory-value">
-                        {selectedBook.inventory?.totalCopies || 0}
-                      </span>
-                    </div>
-                    <div className="inventory-stat">
-                      <span className="inventory-label">Available:</span>
-                      <span className="inventory-value">
-                        {selectedBook.inventory?.availableCopies || 0}
-                      </span>
-                    </div>
-                    <div className="inventory-stat">
-                      <span className="inventory-label">Checked Out:</span>
-                      <span className="inventory-value">
-                        {selectedBook.inventory?.checkedOutCopies || 0}
-                      </span>
-                    </div>
-                    <div className="inventory-stat">
-                      <span className="inventory-label">Waitlist:</span>
-                      <span className="inventory-value">
-                        {selectedBook.inventory?.waitlistCount || 0}
-                      </span>
-                    </div>
-                    <div className="inventory-stat">
-                      <span className="inventory-label">Last Checked Out:</span>
-                      <span className="inventory-value">
-                        {selectedBook.inventory?.lastCheckedOut || "N/A"}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {selectedBook.description && (
-                  <div className="detail-item description">
-                    <span className="detail-label">Description:</span>
-                    <p className="detail-value">{selectedBook.description}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <BookDetailsModal
+        book={selectedBook}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

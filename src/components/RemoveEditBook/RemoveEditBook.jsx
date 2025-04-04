@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { FaEdit, FaTrash, FaSearch, FaCheck, FaTimes } from "react-icons/fa";
 import { searchBooks, getAllBooks } from "../../services/BookService";
+import Modal from "../common/Modal/Modal";
+import EditBookForm from "./EditBookForm";
+import DeleteConfirmation from "./DeleteConfirmation";
+import RemovalConfirmation from "./RemovalConfirmation";
+import EditConfirmation from "./EditConfirmation";
 import "./RemoveEditBook.css";
 
 function RemoveEditBook() {
@@ -179,6 +184,18 @@ function RemoveEditBook() {
     setShowConfirmation(true);
   };
 
+  // Close edit modal
+  const handleCloseEditModal = () => {
+    setIsEditing(false);
+    setSelectedBook(null);
+  };
+
+  // Close delete modal
+  const handleCloseDeleteModal = () => {
+    setIsDeleting(false);
+    setIsEditing(true);
+  };
+
   return (
     <div className="remove-edit-book-container">
       <h1 className="page-title">Remove/Edit Book</h1>
@@ -243,205 +260,59 @@ function RemoveEditBook() {
         )}
       </div>
 
-      {/* Edit Book Modal */}
-      {isEditing && selectedBook && (
-        <div className="modal-overlay">
-          <div className="edit-modal">
-            <h2>Edit Book</h2>
-            <div className="modal-content">
-              <div className="book-preview">
-                <img
-                  src={selectedBook.imageUrl}
-                  alt={selectedBook.title}
-                  className="book-preview-image"
-                />
-              </div>
-              <form onSubmit={handleEditSubmit} className="edit-form">
-                <div className="form-grid">
-                  <div className="form-column">
-                    <div className="form-group">
-                      <label htmlFor="title">Title:</label>
-                      <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        value={editFormData.title}
-                        onChange={handleEditInputChange}
-                        required
-                      />
-                    </div>
+      {/* Edit Book Modal - Using common Modal component */}
+      <Modal
+        isOpen={isEditing && selectedBook !== null}
+        onClose={handleCloseEditModal}
+        title="Edit Book"
+        size="large"
+      >
+        <EditBookForm
+          selectedBook={selectedBook}
+          editFormData={editFormData}
+          handleEditInputChange={handleEditInputChange}
+          handleEditSubmit={handleEditSubmit}
+          handleDeleteClick={handleDeleteClick}
+          handleCloseEditModal={handleCloseEditModal}
+        />
+      </Modal>
 
-                    <div className="form-group">
-                      <label htmlFor="author">Author:</label>
-                      <input
-                        type="text"
-                        id="author"
-                        name="author"
-                        value={editFormData.author}
-                        onChange={handleEditInputChange}
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="isbn">ISBN:</label>
-                      <input
-                        type="text"
-                        id="isbn"
-                        name="isbn"
-                        value={editFormData.isbn}
-                        onChange={handleEditInputChange}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-column">
-                    <div className="form-group">
-                      <label htmlFor="genre">Genre:</label>
-                      <input
-                        type="text"
-                        id="genre"
-                        name="genre"
-                        value={editFormData.genre}
-                        onChange={handleEditInputChange}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="type">Type:</label>
-                      <input
-                        type="text"
-                        id="type"
-                        name="type"
-                        value={editFormData.type}
-                        onChange={handleEditInputChange}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="description">Description:</label>
-                      <textarea
-                        id="description"
-                        name="description"
-                        value={editFormData.description}
-                        onChange={handleEditInputChange}
-                        rows="4"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="modal-actions">
-                  <button
-                    type="button"
-                    className="delete-button"
-                    onClick={handleDeleteClick}
-                  >
-                    <FaTrash /> Remove
-                  </button>
-                  <div className="right-actions">
-                    <button
-                      type="button"
-                      className="cancel-button"
-                      onClick={() => setIsEditing(false)}
-                    >
-                      <FaTimes /> Cancel
-                    </button>
-                    <button type="submit" className="save-button">
-                      <FaCheck /> Save
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Delete Confirmation Modal */}
-      {isDeleting && selectedBook && (
-        <div className="modal-overlay">
-          <div className="delete-modal">
-            <h2>Confirm Removal</h2>
-            <p>
-              Are you sure you want to remove{" "}
-              <strong>{selectedBook.title}</strong> by{" "}
-              <strong>{selectedBook.author}</strong> from the library system?
-            </p>
-            <p className="warning-text">This action cannot be undone.</p>
-            <div className="modal-actions">
-              <button
-                className="cancel-button"
-                onClick={() => {
-                  setIsDeleting(false);
-                  setIsEditing(true);
-                }}
-              >
-                <FaTimes /> Cancel
-              </button>
-              <button
-                className="delete-confirm-button"
-                onClick={handleDeleteConfirm}
-              >
-                <FaTrash /> Remove
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Delete Confirmation Modal - Using common Modal component */}
+      <Modal
+        isOpen={isDeleting && selectedBook !== null}
+        onClose={handleCloseDeleteModal}
+        title="Confirm Removal"
+        size="small"
+      >
+        <DeleteConfirmation
+          selectedBook={selectedBook}
+          handleCloseDeleteModal={handleCloseDeleteModal}
+          handleDeleteConfirm={handleDeleteConfirm}
+        />
+      </Modal>
 
       {/* Success Confirmation Dialog for Removal */}
-      {showConfirmation && (
-        <div className="success-confirmation-overlay">
-          <div className="success-confirmation">
-            <div
-              className="close-btn"
-              onClick={() => setShowConfirmation(false)}
-            >
-              ✕
-            </div>
-            <h2>Book</h2>
-            <h3>"{removedBookTitle}"</h3>
-            <p>removed</p>
-            <div className="confirmation-icon">
-              <div className="checkmark"></div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={showConfirmation}
+        onClose={() => setShowConfirmation(false)}
+        title="Book Removed"
+        size="small"
+      >
+        <RemovalConfirmation removedBookTitle={removedBookTitle} />
+      </Modal>
 
       {/* Success Confirmation Dialog for Edit */}
-      {showEditConfirmation && (
-        <div className="success-confirmation-overlay">
-          <div className="success-confirmation">
-            <div
-              className="close-btn"
-              onClick={() => setShowEditConfirmation(false)}
-            >
-              ✕
-            </div>
-            <h2>Change Successful</h2>
-            <h3>"{editedBookTitle}"</h3>
-            <p>updated</p>
-            {editChanges.length > 0 && (
-              <div className="changes-list">
-                <p className="changes-title">Changes made:</p>
-                <ul>
-                  {editChanges.map((change, index) => (
-                    <li key={index}>
-                      <strong>{change.field}:</strong> {change.from} →{" "}
-                      {change.to}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <div className="confirmation-icon">
-              <div className="checkmark"></div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={showEditConfirmation}
+        onClose={() => setShowEditConfirmation(false)}
+        title="Change Successful"
+        size="small"
+      >
+        <EditConfirmation
+          editedBookTitle={editedBookTitle}
+          editChanges={editChanges}
+        />
+      </Modal>
     </div>
   );
 }
