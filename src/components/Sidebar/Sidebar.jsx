@@ -106,35 +106,13 @@ function Sidebar({ isLoggedIn }) {
             <ul className="sidebar-menu">
               <li>
                 <Link
-                  to="/member-search"
+                  to="/view-member"
                   onClick={() => isMobile && setSidebarOpen(false)}
                   className={
-                    location.pathname === "/member-search" ? "active" : ""
+                    location.pathname === "/view-member" ? "active" : ""
                   }
                 >
-                  Member Search
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/add-member"
-                  onClick={() => isMobile && setSidebarOpen(false)}
-                  className={
-                    location.pathname === "/add-member" ? "active" : ""
-                  }
-                >
-                  Add Member
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/remove-member"
-                  onClick={() => isMobile && setSidebarOpen(false)}
-                  className={
-                    location.pathname === "/remove-member" ? "active" : ""
-                  }
-                >
-                  Remove Member
+                  View Member
                 </Link>
               </li>
             </ul>

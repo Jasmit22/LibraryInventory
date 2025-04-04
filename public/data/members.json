@@ -5,7 +5,20 @@
     "lastName": "Doe",
     "email": "john.doe@gmail.com",
     "phone": "1234567890",
-    "address": "123 Street"
+    "address": "123 Street",
+    "isBorrowing": true,
+    "isHolding": false,
+    "borrowed": {
+      "id": 1,
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "isbn": "9780743273565",
+      "genre": "Classic",
+      "type": "Hardcover",
+      "imageUrl": "/images/books/the-great-gatsby.jpg",
+      "status": "21 days left"
+    },
+    "holds": null
   },
   {
     "id": 2,
@@ -13,7 +26,29 @@
     "lastName": "Doe",
     "email": "jane.doe@gmail.com",
     "phone": null,
-    "address": null
+    "address": null,
+    "isBorrowing": true,
+    "isHolding": true,
+    "borrowed": {
+      "id": 3,
+      "title": "1984",
+      "author": "George Orwell",
+      "isbn": "9780451524935",
+      "genre": "Dystopian",
+      "type": "Paperback",
+      "imageUrl": "/images/books/1984.jpg",
+      "status": "4 days left"
+    },
+    "holds": {
+      "id": 5,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "isbn": "9780547928227",
+      "genre": "Fantasy",
+      "type": "Hardcover",
+      "imageUrl": "/images/books/the-hobbit.jpg",
+      "status": "~2 weeks wait"
+    }
   },
   {
     "id": 3,
@@ -21,7 +56,29 @@
     "lastName": "Lee",
     "email": "blee@gmail.com",
     "phone": "5875858506",
-    "address": null
+    "address": null,
+    "isBorrowing": true,
+    "isHolding": true,
+    "borrowed": {
+      "id": 3,
+      "title": "1984",
+      "author": "George Orwell",
+      "isbn": "9780451524935",
+      "genre": "Dystopian",
+      "type": "Paperback",
+      "imageUrl": "/images/books/1984.jpg",
+      "status": "15 days left"
+    },
+    "holds": {
+      "id": 4,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "isbn": "9780141439518",
+      "genre": "Romance",
+      "type": "Hardcover",
+      "imageUrl": "/images/books/pride-and-prejudice.jpg",
+      "status": "~8 weeks wait"
+    }
   },
   {
     "id": 4,
@@ -29,7 +86,20 @@
     "lastName": "Pall",
     "email": "pall_penn57@gmail.com",
     "phone": "5873546273",
-    "address": null
+    "address": null,
+    "isBorrowing": false,
+    "isHolding": true,
+    "borrowed": null,
+    "holds": {
+      "id": 10,
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "isbn": "9780062315007",
+      "genre": "Fiction",
+      "type": "Paperback",
+      "imageUrl": "/images/books/the-alchemist.jpg",
+      "status": "~5 weeks wait"
+    }
   },
   {
     "id": 5,
@@ -37,6 +107,10 @@
     "lastName": "Dee",
     "email": "tdbear@gmail.com",
     "phone": null,
-    "address": null
+    "address": null,
+    "isBorrowing": false,
+    "isHolding": false,
+    "borrowed": null,
+    "holds": null
   }
 ]

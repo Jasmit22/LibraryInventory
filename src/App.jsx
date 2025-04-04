@@ -9,9 +9,7 @@ import Deliveries from "./components/Deliveries/Deliveries";
 import BookSearch from "./components/BookSearch/BookSearch";
 import AddBook from "./components/AddBook/AddBook";
 import RemoveEditBook from "./components/RemoveEditBook/RemoveEditBook";
-import MemberSearch from "./components/MemberSearch/MemberSearch";
-import AddMember from "./components/AddMember/AddMember";
-import RemoveMember from "./components/RemoveMember/RemoveMember";
+import ViewMember from "./components/ViewMember/ViewMember";
 import HomePage from "./components/HomePage/HomePage";
 
 function App() {
@@ -85,32 +83,12 @@ function App() {
                 }
               />
               <Route
-                path="/member-search"
+                path="/view-member"
                 element={
                   !isLoggedIn ? (
                     <Navigate to="/login" replace />
                   ) : (
-                    <MemberSearch />
-                  )
-                }
-              />
-              <Route
-                path="/add-member"
-                element={
-                  !isLoggedIn ? (
-                    <Navigate to="/login" replace /> 
-                  ) : (
-                   <AddMember />
-                  )
-                }
-              />
-              <Route
-                path="/remove-member"
-                element={
-                  !isLoggedIn ? (
-                    <Navigate to="/login" replace />
-                  ) : (
-                    <RemoveMember />
+                    <ViewMember />
                   )
                 }
               />
