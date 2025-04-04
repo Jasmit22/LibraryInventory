@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Modal from "../common/Modal/Modal";
 import "./Login.css";
 
 function Login({ onLogin }) {
@@ -8,16 +9,16 @@ function Login({ onLogin }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   //reset password
-  const [showResetModal, setShowResetModal] = useState(false); 
-  const [resetEmail, setResetEmail] = useState('');             
-  const [resetSuccess, setResetSuccess] = useState(false);     
-  const [resetError, setResetError] = useState('');
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetSuccess, setResetSuccess] = useState(false);
+  const [resetError, setResetError] = useState("");
 
   //dummy info. if user types this in as a password, prompt will show
   const validUser = {
     password: "incorrect",
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -31,9 +32,9 @@ function Login({ onLogin }) {
     } else if (password == validUser.password) {
       setError("Invalid Username or Password.");
     } else {
-      setError(""); 
+      setError("");
       onLogin(true);
-      navigate("/"); 
+      navigate("/");
     }
   };
 
@@ -91,70 +92,67 @@ function Login({ onLogin }) {
             Log In
           </button>
         </form>
-        {showResetModal && (
-          <div className="modal-overlay">
-            <div className="modal-box">
-              {!resetSuccess ? (
-                <>
-                  <h2 className="modal-title">Forgot Your Password?</h2>
-                  <p className="modal-subtitle">
-                    Enter your email address and we will send you instructions to reset your password.
-                  </p>
-                  <input
-                    type="email"
-                    placeholder="Email address"
-                    value={resetEmail}
-                    onChange={(e) => {
-                      setResetEmail(e.target.value); 
-                      if (resetError) setResetError(''); //goes away if user begins typing again
-                    }}
-                    className="modal-input"
-                  />
 
-                  {resetError && (
-                    <p className="modal-error">{resetError}</p>
-                  )}
+        {/* Use the common Modal component */}
+        <Modal
+          isOpen={showResetModal}
+          onClose={() => setShowResetModal(false)}
+          title={resetSuccess ? "Check Your Email" : "Forgot Your Password?"}
+          size="small"
+        >
+          {!resetSuccess ? (
+            <div className="reset-password-content">
+              <p className="modal-subtitle">
+                Enter your email address and we will send you instructions to
+                reset your password.
+              </p>
+              <input
+                type="email"
+                placeholder="Email address"
+                value={resetEmail}
+                onChange={(e) => {
+                  setResetEmail(e.target.value);
+                  if (resetError) setResetError("");
+                }}
+                className="modal-input"
+              />
 
-                  <button
-                    className="modal-submit"
-                    onClick={() => {
-                      if (!resetEmail.trim()) {
-                        setResetError('Please enter your email address.');
-                      } else {
-                        setResetSuccess(true);
-                        setResetError('');
-                      }
-                    }}
-                  >
-                    Continue
-                  </button>
-                  <p className="modal-link" onClick={() => setShowResetModal(false)}>
-                    Back to the Platform
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h2 className="modal-title">Check Your Email</h2>
-                  <p className="modal-subtitle">
-                    If an account exists for <span className="highlighted-email">{resetEmail}</span>, we've sent a password reset link to that address.
-                  </p>
-                  <button
-                    className="modal-submit"
-                    onClick={() => {
-                      setShowResetModal(false);
-                      setResetEmail('');
-                      setResetSuccess(false);
-                    }}
-                  >
-                    Close
-                  </button>
-                </>
-              )}
+              {resetError && <p className="modal-error">{resetError}</p>}
+
+              <button
+                className="modal-submit"
+                onClick={() => {
+                  if (!resetEmail.trim()) {
+                    setResetError("Please enter your email address.");
+                  } else {
+                    setResetSuccess(true);
+                    setResetError("");
+                  }
+                }}
+              >
+                Continue
+              </button>
             </div>
-          </div>
-        )}
-
-
+          ) : (
+            <div className="reset-success-content">
+              <p className="modal-subtitle">
+                If an account exists for{" "}
+                <span className="highlighted-email">{resetEmail}</span>, we've
+                sent a password reset link to that address.
+              </p>
+              <button
+                className="modal-submit"
+                onClick={() => {
+                  setShowResetModal(false);
+                  setResetEmail("");
+                  setResetSuccess(false);
+                }}
+              >
+                Close
+              </button>
+            </div>
+          )}
+        </Modal>
       </div>
     </div>
   );

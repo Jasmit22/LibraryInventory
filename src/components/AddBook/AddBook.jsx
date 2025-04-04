@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FaPlus,
@@ -8,6 +8,10 @@ import {
   FaBook,
   FaExclamationTriangle,
   FaBarcode,
+  FaTag,
+  FaUser,
+  FaInfoCircle,
+  FaBookOpen,
 } from "react-icons/fa";
 import { addBook, lookupBookByISBN } from "../../services/BookService";
 import "./AddBook.css";
@@ -31,6 +35,20 @@ function AddBook() {
   const [addedBook, setAddedBook] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [showUploadMessage, setShowUploadMessage] = useState(false);
+  const [lookupSuccess, setLookupSuccess] = useState(false);
+  const [scanSuccess, setScanSuccess] = useState(false);
+
+  // Clear success messages after 3 seconds
+  useEffect(() => {
+    let timer;
+    if (lookupSuccess || scanSuccess) {
+      timer = setTimeout(() => {
+        setLookupSuccess(false);
+        setScanSuccess(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [lookupSuccess, scanSuccess]);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -52,6 +70,7 @@ function AddBook() {
 
     setIsLookingUp(true);
     setError("");
+    setLookupSuccess(false);
 
     try {
       const bookInfo = await lookupBookByISBN(isbnLookup.trim());
@@ -67,6 +86,7 @@ function AddBook() {
       });
 
       setIsbnLookup("");
+      setLookupSuccess(true);
     } catch (err) {
       setError("Failed to lookup ISBN: " + err.message);
     } finally {
@@ -149,6 +169,8 @@ function AddBook() {
   // Add this function to simulate scanning
   const handleScan = () => {
     setIsScanning(true);
+    setScanSuccess(false);
+    setError("");
 
     // Simulate scanning process
     setTimeout(() => {
@@ -173,26 +195,14 @@ function AddBook() {
       // Populate all fields with sample data
       setBookData(sampleBookData);
       setIsScanning(false);
+      setScanSuccess(true);
     }, 1500);
   };
 
-  // Add this function after your other handler functions (around line 176)
+  // Update this function to use a browser alert
   const handleCoverUploadClick = () => {
-    setShowUploadMessage(true);
-
-    // Automatically hide the message after 3 seconds
-    setTimeout(() => {
-      setShowUploadMessage(false);
-    }, 3000);
-  };
-
-  // Add this component after your other handler functions
-  const FileExplorerMessage = () => {
-    return (
-      <div className="file-explorer-message">
-        Your file explorer would open here. Feature under development.
-      </div>
-    );
+    // Use a browser alert instead of a custom component
+    alert("Your file explorer would open here. Feature under development.");
   };
 
   // If showing confirmation screen
@@ -208,21 +218,21 @@ function AddBook() {
           <h2>Book Added Successfully</h2>
           <div className="confirmation-details">
             <div className="detail-item">
-              <span className="detail-label">Title</span>
+              <span className="detail-label">Title:</span>
               <span className="detail-value">{addedBook.title}</span>
             </div>
             <div className="detail-item">
-              <span className="detail-label">Author</span>
+              <span className="detail-label">Author:</span>
               <span className="detail-value">{addedBook.author}</span>
             </div>
             <div className="detail-item">
-              <span className="detail-label">Genre</span>
+              <span className="detail-label">Genre:</span>
               <span className="detail-value">
                 {addedBook.genre || "Not specified"}
               </span>
             </div>
             <div className="detail-item">
-              <span className="detail-label">Type</span>
+              <span className="detail-label">Type:</span>
               <span className="detail-value">
                 {addedBook.type || "Not specified"}
               </span>
@@ -248,44 +258,79 @@ function AddBook() {
     <div className="add-book-container">
       <h1 className="page-title">Add Book</h1>
 
-      {/* ISBN Lookup Section */}
-      <div className="isbn-lookup-section">
-        <h2 className="section-title">Add by ISBN</h2>
-        <form onSubmit={handleIsbnLookup} className="isbn-lookup-form">
-          <div className="isbn-input-wrapper">
-            <FaSearch className="isbn-search-icon" />
-            <input
-              type="text"
-              value={isbnLookup}
-              onChange={(e) => setIsbnLookup(e.target.value)}
-              placeholder="Enter ISBN to auto-fill book details"
-              className="isbn-input"
-            />
-            <button
-              type="submit"
-              className="isbn-lookup-button"
-              disabled={isLookingUp}
-            >
-              {isLookingUp ? (
-                <>
-                  <span className="spinner"></span>
-                  Looking up...
-                </>
-              ) : (
-                "Lookup"
+      {/* Quick Add Section */}
+      <div className="add-book-card">
+        <div className="card-header">
+          <h2 className="section-title">
+            <FaPlus /> Quick Add
+          </h2>
+        </div>
+        <div className="card-body">
+          <div className="quick-add-container">
+            {/* ISBN Lookup */}
+            <div className="quick-add-method">
+              <div className="quick-add-title">
+                <FaSearch /> ISBN Lookup
+              </div>
+              <form onSubmit={handleIsbnLookup} className="isbn-lookup-form">
+                <div className="isbn-input-group">
+                  <FaSearch className="isbn-search-icon" />
+                  <input
+                    type="text"
+                    value={isbnLookup}
+                    onChange={(e) => setIsbnLookup(e.target.value)}
+                    placeholder="Enter ISBN"
+                    className="isbn-input"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="isbn-lookup-button"
+                  disabled={isLookingUp}
+                >
+                  {isLookingUp ? (
+                    <>
+                      <span className="spinner"></span>
+                      Looking...
+                    </>
+                  ) : (
+                    "Lookup"
+                  )}
+                </button>
+              </form>
+              {lookupSuccess && (
+                <div className="success-notification">
+                  <FaCheck /> Book details successfully populated
+                </div>
               )}
-            </button>
+            </div>
+
+            {/* Barcode Scanner */}
+            <div className="quick-add-method">
+              <div className="quick-add-title">
+                <FaBarcode /> Barcode Scanner
+              </div>
+              <div className="scan-container">
+                <FaBarcode className="scan-icon" />
+                <button
+                  type="button"
+                  className={`scan-button ${
+                    isScanning ? "scan-animation" : ""
+                  }`}
+                  onClick={handleScan}
+                  disabled={isScanning}
+                >
+                  {isScanning ? "Scanning..." : "Scan Book"}
+                </button>
+              </div>
+              {scanSuccess && (
+                <div className="success-notification">
+                  <FaCheck /> Book details successfully scanned
+                </div>
+              )}
+            </div>
           </div>
-          <button
-            type="button"
-            className={`scan-button ${isScanning ? "scan-animation" : ""}`}
-            onClick={handleScan}
-            disabled={isScanning}
-          >
-            <FaBarcode />
-            {isScanning ? "Scanning..." : "Scan Book"}
-          </button>
-        </form>
+        </div>
       </div>
 
       {error && (
@@ -295,136 +340,163 @@ function AddBook() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="add-book-form">
-        <div className="form-grid">
-          <div className="cover-upload-section">
-            <div className="cover-upload-area" onClick={handleCoverUploadClick}>
-              <div className="upload-placeholder">
-                <FaBook className="book-icon" />
-                <p>Upload Cover</p>
-                <p className="small-text">(Click to upload)</p>
-              </div>
-            </div>
-            {showUploadMessage && <FileExplorerMessage />}
-          </div>
-
-          <div className="book-details-section">
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="title">Title</label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={bookData.title}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Enter book title"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="type">Type</label>
-                <select
-                  id="type"
-                  name="type"
-                  value={bookData.type}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Select type</option>
-                  <option value="Hardcover">Hardcover</option>
-                  <option value="Paperback">Paperback</option>
-                  <option value="E-book">E-book</option>
-                  <option value="Audiobook">Audiobook</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="author">Author</label>
-                <input
-                  type="text"
-                  id="author"
-                  name="author"
-                  value={bookData.author}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Enter author name"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="genre">Genre</label>
-                <select
-                  id="genre"
-                  name="genre"
-                  value={bookData.genre}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Select genre</option>
-                  <option value="Fiction">Fiction</option>
-                  <option value="Non-Fiction">Non-Fiction</option>
-                  <option value="Mystery">Mystery</option>
-                  <option value="Science Fiction">Science Fiction</option>
-                  <option value="Fantasy">Fantasy</option>
-                  <option value="Romance">Romance</option>
-                  <option value="Thriller">Thriller</option>
-                  <option value="Biography">Biography</option>
-                  <option value="History">History</option>
-                  <option value="Children">Children</option>
-                  <option value="Young Adult">Young Adult</option>
-                  <option value="Classic">Classic</option>
-                  <option value="Self-Help">Self-Help</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-group full-width">
-                <label htmlFor="isbn">ISBN</label>
-                <input
-                  type="text"
-                  id="isbn"
-                  name="isbn"
-                  value={bookData.isbn}
-                  onChange={handleInputChange}
-                  placeholder="Enter ISBN (optional)"
-                />
-              </div>
-            </div>
-
-            <div className="form-group full-width">
-              <label htmlFor="description">Description</label>
-              <textarea
-                id="description"
-                name="description"
-                value={bookData.description}
-                onChange={handleInputChange}
-                rows="4"
-                placeholder="Enter book description"
-              ></textarea>
-            </div>
-          </div>
+      {/* Book Details Form */}
+      <div className="add-book-card">
+        <div className="card-header">
+          <h2 className="section-title">
+            <FaBookOpen /> Book Details
+          </h2>
         </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="add-book-form-grid">
+              <div
+                className="cover-upload-area"
+                onClick={handleCoverUploadClick}
+              >
+                <div className="upload-placeholder">
+                  <FaBook className="book-icon" />
+                  <p>Upload Cover</p>
+                  <p className="small-text">(Click to upload)</p>
+                </div>
+              </div>
 
-        <div className="form-actions">
-          <button type="submit" className="add-button" disabled={isSubmitting}>
-            {isSubmitting ? (
-              <>
-                <span className="spinner"></span>
-                Adding...
-              </>
-            ) : (
-              <>
-                <FaPlus className="button-icon" />
-                Add Book
-              </>
-            )}
-          </button>
+              <div className="book-details-section">
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="title">
+                      <FaBookOpen /> Title
+                    </label>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      value={bookData.title}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Enter title"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="author">
+                      <FaUser /> Author
+                    </label>
+                    <input
+                      type="text"
+                      id="author"
+                      name="author"
+                      value={bookData.author}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Enter author"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="genre">
+                      <FaTag /> Genre
+                    </label>
+                    <select
+                      id="genre"
+                      name="genre"
+                      value={bookData.genre}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Select genre</option>
+                      <option value="Fiction">Fiction</option>
+                      <option value="Non-Fiction">Non-Fiction</option>
+                      <option value="Mystery">Mystery</option>
+                      <option value="Science Fiction">Science Fiction</option>
+                      <option value="Fantasy">Fantasy</option>
+                      <option value="Romance">Romance</option>
+                      <option value="Thriller">Thriller</option>
+                      <option value="Biography">Biography</option>
+                      <option value="History">History</option>
+                      <option value="Children">Children</option>
+                      <option value="Young Adult">Young Adult</option>
+                      <option value="Classic">Classic</option>
+                      <option value="Self-Help">Self-Help</option>
+                      <option value="Science">Science</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="type">
+                      <FaBook /> Type
+                    </label>
+                    <select
+                      id="type"
+                      name="type"
+                      value={bookData.type}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Select type</option>
+                      <option value="Hardcover">Hardcover</option>
+                      <option value="Paperback">Paperback</option>
+                      <option value="E-book">E-book</option>
+                      <option value="Audiobook">Audiobook</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="isbn">
+                      <FaBarcode /> ISBN
+                    </label>
+                    <input
+                      type="text"
+                      id="isbn"
+                      name="isbn"
+                      value={bookData.isbn}
+                      onChange={handleInputChange}
+                      placeholder="Enter ISBN (optional)"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group full-width">
+                  <label htmlFor="description">
+                    <FaInfoCircle /> Description
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={bookData.description}
+                    onChange={handleInputChange}
+                    rows="3"
+                    placeholder="Enter book description"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div className="form-actions">
+              <button
+                type="submit"
+                className="add-button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="spinner"></span>
+                    Adding...
+                  </>
+                ) : (
+                  <>
+                    <FaPlus />
+                    Add Book
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
