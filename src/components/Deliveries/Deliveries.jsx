@@ -47,9 +47,13 @@ function Deliveries() {
   };
 
   // Handle search
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
+    e.preventDefault();
+    const query = searchQuery.toLowerCase();
 
     if (query.trim() === "") {
       setFilteredIncoming(incomingDeliveries);
@@ -99,20 +103,25 @@ function Deliveries() {
   return (
     <div className="deliveries-container">
       <h1 className="deliveries-title">Deliveries</h1>
+      <p className="page-description">
+        Track incoming and outgoing book deliveries
+      </p>
 
-      {/* Search Bar */}
-      <div className="deliveries-search-container">
+      {/* Search Bar - Updated to match BookSearch exactly */}
+      <form onSubmit={handleSearch} className="search-container">
         <div className="search-input-wrapper">
-          <FaSearch className="search-icon" />
           <input
             type="text"
             value={searchQuery}
-            onChange={handleSearch}
+            onChange={handleSearchChange}
             placeholder="Search by title, author, origin/destination, genre or status"
-            className="deliveries-search-input"
+            className="search-input"
           />
+          <button type="submit" className="search-button">
+            <FaSearch className="search-button-icon" />
+          </button>
         </div>
-      </div>
+      </form>
 
       {loading ? (
         <p className="loading-message">Loading deliveries...</p>

@@ -23,7 +23,15 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="login-container">
+    <div
+      className="login-container"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
       <div className="login-form-wrapper">
         <h2>Login to Calgary Private Library</h2>
         {error && <p className="error-message">{error}</p>}

@@ -9,11 +9,24 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-logo {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover {
+  transform: translateY(-2px);
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  color: #e2e8f0;
 }
 
 .logo-text {
@@ -70,18 +83,27 @@
 }
 
 .auth-button {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   background-color: transparent;
   color: white;
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .auth-button:hover {
   background-color: white;
   color: #1a365d;
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+.auth-icon {
+  font-size: 1rem;
 }
 
 /* Responsive styles */
@@ -98,11 +120,19 @@
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
   }
+
+  .logo-icon {
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 480px) {
   .navbar-logo h1 {
     font-size: 1rem;
+  }
+
+  .logo-icon {
+    font-size: 1.2rem;
   }
 }
 

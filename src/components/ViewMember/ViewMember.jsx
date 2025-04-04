@@ -1,23 +1,35 @@
 import { useState, useEffect } from "react";
-import { FaSearch, FaTimes } from "react-icons/fa";
-import { getAllMembers} from "../../services/MemberService";
+import {
+  FaSearch,
+  FaTimes,
+  FaUser,
+  FaBook,
+  FaCalendarAlt,
+} from "react-icons/fa";
+import { getAllMembers } from "../../services/MemberService";
 import "./ViewMember.css";
 
 function ViewMember() {
-  const [searchQuery, setSearchQuery] = useState(""); 
-  const [allMembers, setAllMembers] = useState([]); // Store all members
+  const [searchQuery, setSearchQuery] = useState("");
+  const [allMembers, setAllMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState(null);
-  const [searchResults, setSearchResults] = useState([]); 
-  const [hasSearched, setHasSearched] = useState(false); 
+  const [searchResults, setSearchResults] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [sortField, setSortField] = useState("id");
+  const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
     const fetchMembers = async () => {
       setLoading(true);
       try {
-        const members = await getAllMembers(); // Fetch all members
-        setAllMembers(members); // Store fetched members
-        setSearchResults(members); // Set initial search results
+        const members = await getAllMembers();
+
+        // Sort members by ID initially
+        const sortedMembers = [...members].sort((a, b) => a.id - b.id);
+
+        setAllMembers(members);
+        setSearchResults(sortedMembers);
       } catch (error) {
         console.error("Error fetching members:", error);
       } finally {
@@ -26,90 +38,190 @@ function ViewMember() {
     };
 
     fetchMembers();
-  }, []); 
+  }, []);
 
-const handleSearch = async (e) => {
-  e.preventDefault(); // Prevent form submission default behavior
-  setLoading(true); // Show loading state
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  console.log("Search Term:", searchQuery); // Log search query
+    try {
+      const results = allMembers.filter((member) => {
+        const fullName = `${member.firstName} ${member.lastName}`.toLowerCase();
+        const searchTerm = searchQuery.toLowerCase();
 
-  try {
-    const results = allMembers.filter((member) => {
-      const fullName = `${member.firstName} ${member.lastName}`.toLowerCase();
-      const searchTerm = searchQuery.toLowerCase();
+        return (
+          fullName.includes(searchTerm) ||
+          member.id.toString().toLowerCase().includes(searchTerm) ||
+          member.email.toLowerCase().includes(searchTerm)
+        );
+      });
 
-      console.log("Checking member:", member); // Log each member
+      // Sort the filtered results according to current sort settings
+      const sortedResults = [...results].sort((a, b) => {
+        let valueA, valueB;
 
-      return (
-        fullName.includes(searchTerm) ||
-        member.id.toString().toLowerCase().includes(searchTerm) || // Ensure ID is treated as a string
-        member.email.toLowerCase().includes(searchTerm)
-      );
+        if (sortField === "name") {
+          valueA = `${a.firstName} ${a.lastName}`.toLowerCase();
+          valueB = `${b.firstName} ${b.lastName}`.toLowerCase();
+        } else {
+          valueA = a[sortField] ? String(a[sortField]).toLowerCase() : "";
+          valueB = b[sortField] ? String(b[sortField]).toLowerCase() : "";
+        }
+
+        if (valueA < valueB) return sortDirection === "asc" ? -1 : 1;
+        if (valueA > valueB) return sortDirection === "asc" ? 1 : -1;
+        return 0;
+      });
+
+      setSearchResults(sortedResults);
+      setHasSearched(true);
+    } catch (error) {
+      console.error("Error searching members:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMemberClick = (member) => {
+    setSelectedMember(member);
+  };
+
+  const handleSort = (field) => {
+    const newDirection =
+      field === sortField && sortDirection === "asc" ? "desc" : "asc";
+
+    setSortField(field);
+    setSortDirection(newDirection);
+
+    const sortedResults = [...searchResults].sort((a, b) => {
+      let valueA, valueB;
+
+      if (field === "name") {
+        valueA = `${a.firstName} ${a.lastName}`.toLowerCase();
+        valueB = `${b.firstName} ${b.lastName}`.toLowerCase();
+      } else {
+        valueA = a[field] ? String(a[field]).toLowerCase() : "";
+        valueB = b[field] ? String(b[field]).toLowerCase() : "";
+      }
+
+      if (valueA < valueB) return newDirection === "asc" ? -1 : 1;
+      if (valueA > valueB) return newDirection === "asc" ? 1 : -1;
+      return 0;
     });
 
-    console.log("Search Results:", results); // Log search results
-
-    setSearchResults(results);
-    setHasSearched(true);
-  } catch (error) {
-    console.error("Error searching members:", error);
-  } finally {
-    setLoading(false);
-  }
-};
-
-// Handle member selection
-const handleMemberClick = (member) => {
-  setSelectedMember(member);
-}
+    setSearchResults(sortedResults);
+  };
 
   return (
     <div className="member-search-container">
-      <h1 className="page-title">View Member</h1>
-      <p>Search for library members by name, ID, or email.</p>
+      <h1 className="page-title">Member Directory</h1>
+      <p className="page-description">
+        Search for library members by name, ID, or email
+      </p>
 
-      <div className="search-container">
+      <form onSubmit={handleSearch} className="search-container">
         <input
           type="text"
           placeholder="Search members..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+          onChange={(e) => setSearchQuery(e.target.value)}
           className="search-input"
         />
-        <button className="search-button" onClick={handleSearch}>
+        <button type="submit" className="search-button">
           <FaSearch />
         </button>
-      </div>
+      </form>
 
       <div className="results-placeholder">
         {loading ? (
-          <p>Loading members...</p>
+          <div className="loading-message">
+            <FaUser size={30} style={{ marginBottom: "1rem", opacity: 0.3 }} />
+            <p>Loading members...</p>
+          </div>
         ) : (
           <>
             {hasSearched && searchResults.length === 0 ? (
-              <p>No results found</p> // Display no results message
+              <div className="no-results-message">
+                <p>No members found matching your search criteria</p>
+              </div>
             ) : (
               <div className="search-results-container">
                 <table className="search-results-table">
                   <thead>
                     <tr>
-                      <th>Library ID</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>Address</th>
+                      <th
+                        onClick={() => handleSort("id")}
+                        className="sortable-header"
+                      >
+                        Library ID
+                        {sortField === "id" && (
+                          <span className="sort-indicator">
+                            {sortDirection === "asc" ? " ▲" : " ▼"}
+                          </span>
+                        )}
+                      </th>
+                      <th
+                        onClick={() => handleSort("name")}
+                        className="sortable-header"
+                      >
+                        Name
+                        {sortField === "name" && (
+                          <span className="sort-indicator">
+                            {sortDirection === "asc" ? " ▲" : " ▼"}
+                          </span>
+                        )}
+                      </th>
+                      <th
+                        onClick={() => handleSort("email")}
+                        className="sortable-header"
+                      >
+                        Email
+                        {sortField === "email" && (
+                          <span className="sort-indicator">
+                            {sortDirection === "asc" ? " ▲" : " ▼"}
+                          </span>
+                        )}
+                      </th>
+                      <th
+                        onClick={() => handleSort("phone")}
+                        className="sortable-header"
+                      >
+                        Phone
+                        {sortField === "phone" && (
+                          <span className="sort-indicator">
+                            {sortDirection === "asc" ? " ▲" : " ▼"}
+                          </span>
+                        )}
+                      </th>
+                      <th
+                        onClick={() => handleSort("address")}
+                        className="sortable-header"
+                      >
+                        Address
+                        {sortField === "address" && (
+                          <span className="sort-indicator">
+                            {sortDirection === "asc" ? " ▲" : " ▼"}
+                          </span>
+                        )}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {searchResults.map((member) => (
-                    <tr key={member.id} onClick={() => handleMemberClick(member)}>
-                      <td><strong>{member.id}</strong></td>
-                      <td>{member.firstName} {member.lastName}</td>
-                      <td>{member.email}</td>
-                      <td>{member.phone || "-"}</td>
-                      <td>{member.address || "-"}</td>
-                    </tr>
+                      <tr
+                        key={member.id}
+                        onClick={() => handleMemberClick(member)}
+                      >
+                        <td>
+                          <strong>{member.id}</strong>
+                        </td>
+                        <td>
+                          {member.firstName} {member.lastName}
+                        </td>
+                        <td>{member.email}</td>
+                        <td>{member.phone || "-"}</td>
+                        <td>{member.address || "-"}</td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
@@ -119,150 +231,177 @@ const handleMemberClick = (member) => {
         )}
       </div>
 
-      {/* View Member Modal */}
+      {/* Member Details Modal */}
       {selectedMember && (
-        <div className="member-details-modal">
+        <div
+          className="member-details-modal"
+          onClick={() => setSelectedMember(null)}
+        >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>Member Details</h2>
-                <button
-                  className="close-modal-button"
-                  onClick={() => setSelectedMember(null)}
-                >
-                  <FaTimes />
-                </button>
+              <button
+                className="close-modal-button"
+                onClick={() => setSelectedMember(null)}
+              >
+                <FaTimes />
+              </button>
             </div>
             <div className="member-details-grid">
               <div className="member-details">
                 <div className="member-details-column">
+                  <h2>Personal Information</h2>
+
                   <div className="detail-item">
-                    <h2>{selectedMember.firstName + " " + selectedMember.lastName}</h2>
+                    <span className="detail-label">Full Name</span>
+                    <span className="detail-value">
+                      {selectedMember.firstName} {selectedMember.lastName}
+                    </span>
                   </div>
 
                   <div className="detail-item">
-                    <span className="detail-label">Member ID:</span>
+                    <span className="detail-label">Member ID</span>
                     <span className="detail-value">{selectedMember.id}</span>
                   </div>
 
                   <div className="detail-item">
-                    <span className="detail-label">Email:</span>
+                    <span className="detail-label">Email</span>
                     <span className="detail-value">{selectedMember.email}</span>
                   </div>
 
                   <div className="detail-item">
-                    <span className="detail-label">Phone:</span>
-                    <span className="detail-value">{selectedMember.phone || "N/A"}</span>
+                    <span className="detail-label">Phone</span>
+                    <span className="detail-value">
+                      {selectedMember.phone || (
+                        <span className="empty-state">Not provided</span>
+                      )}
+                    </span>
                   </div>
 
                   <div className="detail-item">
-                    <span className="detail-label">Address:</span>
-                    <span className="detail-value">{selectedMember.address || "N/A"}</span>
+                    <span className="detail-label">Address</span>
+                    <span className="detail-value">
+                      {selectedMember.address || (
+                        <span className="empty-state">Not provided</span>
+                      )}
+                    </span>
                   </div>
                 </div>
 
                 <div className="loans-column">
-                  <h2>Borrowed</h2>
-                  <span className="detail-value">{selectedMember.isBorrowing ? null : "No books borrowed."}</span>
-                  <div className="book-cover">
-                    <img
-                    src={selectedMember.borrowed?.imageUrl}
-                    alt={selectedMember.borrowed?.title}
-                    className="book-detail-image"
-                    />
+                  <h2>
+                    <FaBook style={{ marginRight: "0.5rem" }} />
+                    Currently Borrowed
+                  </h2>
+
+                  {!selectedMember.isBorrowing ? (
+                    <span className="empty-state">
+                      No books currently borrowed
+                    </span>
+                  ) : (
+                    <>
+                      <div className="book-cover">
+                        <img
+                          src={selectedMember.borrowed?.imageUrl}
+                          alt={selectedMember.borrowed?.title}
+                          className="book-detail-image"
+                        />
+                      </div>
+
+                      <div className="book-details">
+                        <div className="detail-item">
+                          <span className="detail-label">Title</span>
+                          <span className="detail-value">
+                            {selectedMember.borrowed?.title}
+                          </span>
+                        </div>
+
+                        <div className="detail-item">
+                          <span className="detail-label">Author</span>
+                          <span className="detail-value">
+                            {selectedMember.borrowed?.author}
+                          </span>
+                        </div>
+
+                        <div className="detail-item">
+                          <span className="detail-label">ISBN</span>
+                          <span className="detail-value">
+                            {selectedMember.borrowed?.isbn}
+                          </span>
+                        </div>
+
+                        <div className="detail-item">
+                          <span className="detail-label">Due Date</span>
+                          <span className="detail-value status-available">
+                            <FaCalendarAlt style={{ marginRight: "0.5rem" }} />
+                            {selectedMember.borrowed?.status}
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div className="book-details">
-                  <div className="detail-item">
-                    <span className="detail-label">Title:</span>
-                    <span className="detail-value">{selectedMember.borrowed?.title || null}</span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Author:</span>
-                    <span className="detail-value">{selectedMember.borrowed?.author || null}</span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">ISBN:</span>
-                    <span className="detail-value">
-                      {selectedMember.borrowed?.isbn || null}
-                    </span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Genre:</span>
-                    <span className="detail-value">
-                      {selectedMember.borrowed?.genre || null}
-                    </span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Type:</span>
-                    <span className="detail-value">
-                      {selectedMember.borrowed?.type || null}
-                    </span>
-                  </div>
-
-                  <div className="detail-item">
-                    <span className="detail-label">Status:</span>
-                    {selectedMember.borrowed?.status || null}
-                  </div>
-                </div> 
-              </div>           
 
                 <div className="loans-column">
-                  <h2>Holds</h2>
-                  <span className="detail-value">{selectedMember.isHolding ? null : "No books on hold."}</span>
-                  <div className="book-cover">
-                    <img
-                    src={selectedMember.holds?.imageUrl || null}
-                    alt={selectedMember.holds?.title || null}
-                    className="book-detail-image"
-                    />
-                  </div>
-                <div className="book-details">
-                  <div className="detail-item">
-                    <span className="detail-label">Title:</span>
-                    <span className="detail-value">{selectedMember.holds?.title || null}</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Author:</span>
-                    <span className="detail-value">{selectedMember.holds?.author || null}</span>
-                  </div>
+                  <h2>
+                    <FaBook style={{ marginRight: "0.5rem" }} />
+                    On Hold
+                  </h2>
 
-                  <div className="detail-item">
-                    <span className="detail-label">ISBN:</span>
-                    <span className="detail-value">
-                      {selectedMember.holds?.isbn || null}
+                  {!selectedMember.isHolding ? (
+                    <span className="empty-state">
+                      No books currently on hold
                     </span>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="book-cover">
+                        <img
+                          src={selectedMember.holds?.imageUrl}
+                          alt={selectedMember.holds?.title}
+                          className="book-detail-image"
+                        />
+                      </div>
 
-                  <div className="detail-item">
-                    <span className="detail-label">Genre:</span>
-                    <span className="detail-value">
-                      {selectedMember.holds?.genre || null}
-                    </span>
-                  </div>
+                      <div className="book-details">
+                        <div className="detail-item">
+                          <span className="detail-label">Title</span>
+                          <span className="detail-value">
+                            {selectedMember.holds?.title}
+                          </span>
+                        </div>
 
-                  <div className="detail-item">
-                    <span className="detail-label">Type:</span>
-                    <span className="detail-value">
-                      {selectedMember.holds?.type || null}
-                    </span>
-                  </div>
+                        <div className="detail-item">
+                          <span className="detail-label">Author</span>
+                          <span className="detail-value">
+                            {selectedMember.holds?.author}
+                          </span>
+                        </div>
 
-                  <div className="detail-item">
-                    <span className="detail-label">Status:</span>
-                    {selectedMember.holds?.status || null}
-                  </div>
-                </div> 
+                        <div className="detail-item">
+                          <span className="detail-label">ISBN</span>
+                          <span className="detail-value">
+                            {selectedMember.holds?.isbn}
+                          </span>
+                        </div>
+
+                        <div className="detail-item">
+                          <span className="detail-label">Wait Time</span>
+                          <span className="detail-value status-unavailable">
+                            <FaCalendarAlt style={{ marginRight: "0.5rem" }} />
+                            {selectedMember.holds?.status}
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
-            </div> 
+            </div>
           </div>
         </div>
-    )}
-    </div>    
+      )}
+    </div>
   );
 }
-  
+
 export default ViewMember;

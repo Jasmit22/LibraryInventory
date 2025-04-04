@@ -52,25 +52,24 @@ function BookSearch() {
   return (
     <div className="book-search-container">
       <h1 className="page-title">Book Search</h1>
+      <p className="page-description">
+        Search for books by title, author, ISBN, or genre
+      </p>
 
-      <div className="search-bar-container">
-        <form onSubmit={handleSearch} className="search-form">
-          <div className="search-input-wrapper">
-            <FaSearch className="search-icon" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="ISBN, genre, title, author"
-              className="search-input"
-              style={{ paddingLeft: "2.5rem" }}
-            />
-          </div>
+      <form onSubmit={handleSearch} className="search-container">
+        <div className="search-input-wrapper">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="ISBN, genre, title, author"
+            className="search-input"
+          />
           <button type="submit" className="search-button">
-            Search
+            <FaSearch className="search-button-icon" />
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
 
       <div>
         {loading ? (

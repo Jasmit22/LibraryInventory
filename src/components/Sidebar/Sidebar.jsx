@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaChevronDown,
+  FaSearch,
+  FaPlus,
+  FaEdit,
+  FaUser,
+  FaTruck,
+} from "react-icons/fa";
 import "./Sidebar.css";
 
 function Sidebar({ isLoggedIn }) {
@@ -56,7 +65,14 @@ function Sidebar({ isLoggedIn }) {
             className="sidebar-header"
             onClick={() => toggleSection("inventory")}
           >
-            <h3>Inventory {expandedSections.inventory ? "▼" : "▶"}</h3>
+            <h3>
+              Inventory
+              <FaChevronDown
+                className={`chevron-icon ${
+                  expandedSections.inventory ? "expanded" : ""
+                }`}
+              />
+            </h3>
           </div>
           {expandedSections.inventory && (
             <ul className="sidebar-menu">
@@ -68,7 +84,7 @@ function Sidebar({ isLoggedIn }) {
                     location.pathname === "/book-search" ? "active" : ""
                   }
                 >
-                  Book Search
+                  <FaSearch /> Book Search
                 </Link>
               </li>
               <li>
@@ -77,7 +93,7 @@ function Sidebar({ isLoggedIn }) {
                   onClick={() => isMobile && setSidebarOpen(false)}
                   className={location.pathname === "/add-book" ? "active" : ""}
                 >
-                  Add Book
+                  <FaPlus /> Add Book
                 </Link>
               </li>
               <li>
@@ -88,7 +104,7 @@ function Sidebar({ isLoggedIn }) {
                     location.pathname === "/remove-edit-book" ? "active" : ""
                   }
                 >
-                  Remove/Edit Book
+                  <FaEdit /> Remove/Edit Book
                 </Link>
               </li>
             </ul>
@@ -100,7 +116,14 @@ function Sidebar({ isLoggedIn }) {
             className="sidebar-header"
             onClick={() => toggleSection("users")}
           >
-            <h3>Manage Users {expandedSections.users ? "▼" : "▶"}</h3>
+            <h3>
+              Manage Users
+              <FaChevronDown
+                className={`chevron-icon ${
+                  expandedSections.users ? "expanded" : ""
+                }`}
+              />
+            </h3>
           </div>
           {expandedSections.users && (
             <ul className="sidebar-menu">
@@ -112,7 +135,7 @@ function Sidebar({ isLoggedIn }) {
                     location.pathname === "/view-member" ? "active" : ""
                   }
                 >
-                  View Member
+                  <FaUser /> View Member
                 </Link>
               </li>
             </ul>
@@ -124,7 +147,14 @@ function Sidebar({ isLoggedIn }) {
             className="sidebar-header"
             onClick={() => toggleSection("delivery")}
           >
-            <h3>Delivery {expandedSections.delivery ? "▼" : "▶"}</h3>
+            <h3>
+              Delivery
+              <FaChevronDown
+                className={`chevron-icon ${
+                  expandedSections.delivery ? "expanded" : ""
+                }`}
+              />
+            </h3>
           </div>
           {expandedSections.delivery && (
             <ul className="sidebar-menu">
@@ -136,7 +166,7 @@ function Sidebar({ isLoggedIn }) {
                     location.pathname === "/deliveries" ? "active" : ""
                   }
                 >
-                  View Incoming/Outgoing Deliveries
+                  <FaTruck /> View Deliveries
                 </Link>
               </li>
             </ul>

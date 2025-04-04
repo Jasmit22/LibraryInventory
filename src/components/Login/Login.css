@@ -4,6 +4,8 @@
   align-items: center;
   padding: 2rem;
   flex: 1; /* Take up available space */
+  width: 100%;
+  height: 100%;
 }
 
 .login-form-wrapper {

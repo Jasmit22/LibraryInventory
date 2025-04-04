@@ -7,6 +7,7 @@ import {
   FaSearch,
   FaBook,
   FaExclamationTriangle,
+  FaBarcode,
 } from "react-icons/fa";
 import { addBook, lookupBookByISBN } from "../../services/BookService";
 import "./AddBook.css";
@@ -28,6 +29,8 @@ function AddBook() {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState("");
   const [addedBook, setAddedBook] = useState(null);
+  const [isScanning, setIsScanning] = useState(false);
+  const [showUploadMessage, setShowUploadMessage] = useState(false);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -143,6 +146,55 @@ function AddBook() {
     setShowConfirmation(false);
   };
 
+  // Add this function to simulate scanning
+  const handleScan = () => {
+    setIsScanning(true);
+
+    // Simulate scanning process
+    setTimeout(() => {
+      // Generate a random ISBN
+      const randomISBN =
+        "978" +
+        Array.from({ length: 10 }, () => Math.floor(Math.random() * 10)).join(
+          ""
+        );
+
+      // Create sample book data
+      const sampleBookData = {
+        title: "The Quantum Universe",
+        author: "Brian Cox & Jeff Forshaw",
+        genre: "Science",
+        type: "Hardcover",
+        description:
+          "In The Quantum Universe, Brian Cox and Jeff Forshaw approach the world of quantum mechanics in the same way they did in Why Does E=mc2? and make fundamental scientific principles accessible—and fascinating—to everyone.",
+        isbn: randomISBN,
+      };
+
+      // Populate all fields with sample data
+      setBookData(sampleBookData);
+      setIsScanning(false);
+    }, 1500);
+  };
+
+  // Add this function after your other handler functions (around line 176)
+  const handleCoverUploadClick = () => {
+    setShowUploadMessage(true);
+
+    // Automatically hide the message after 3 seconds
+    setTimeout(() => {
+      setShowUploadMessage(false);
+    }, 3000);
+  };
+
+  // Add this component after your other handler functions
+  const FileExplorerMessage = () => {
+    return (
+      <div className="file-explorer-message">
+        Your file explorer would open here. Feature under development.
+      </div>
+    );
+  };
+
   // If showing confirmation screen
   if (showConfirmation) {
     return (
@@ -224,6 +276,15 @@ function AddBook() {
               )}
             </button>
           </div>
+          <button
+            type="button"
+            className={`scan-button ${isScanning ? "scan-animation" : ""}`}
+            onClick={handleScan}
+            disabled={isScanning}
+          >
+            <FaBarcode />
+            {isScanning ? "Scanning..." : "Scan Book"}
+          </button>
         </form>
       </div>
 
@@ -237,13 +298,14 @@ function AddBook() {
       <form onSubmit={handleSubmit} className="add-book-form">
         <div className="form-grid">
           <div className="cover-upload-section">
-            <div className="cover-upload-area">
+            <div className="cover-upload-area" onClick={handleCoverUploadClick}>
               <div className="upload-placeholder">
                 <FaBook className="book-icon" />
-                <p>Cover</p>
-                <p className="small-text">(Placeholder will be used)</p>
+                <p>Upload Cover</p>
+                <p className="small-text">(Click to upload)</p>
               </div>
             </div>
+            {showUploadMessage && <FileExplorerMessage />}
           </div>
 
           <div className="book-details-section">

@@ -29,7 +29,9 @@ function App() {
         {/* Navbar Component with login state */}
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
-        <div className="content-container">
+        <div
+          className={`content-container ${isLoggedIn ? "sidebar-visible" : ""}`}
+        >
           {/* Sidebar Component */}
           <Sidebar isLoggedIn={isLoggedIn} />
 

@@ -9,6 +9,9 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: auto; /* This pushes the footer to the bottom */
+  width: 100%;
+  position: relative;
+  z-index: 950; /* Higher than sidebar but lower than navbar */
 }
 
 .footer p {
@@ -48,5 +51,12 @@
   .footer-links {
     flex-direction: column;
     gap: 0.8rem;
+  }
+}
+
+/* For desktop view, add padding to the left to account for the sidebar */
+@media (min-width: 769px) {
+  .footer {
+    padding-left: calc(250px + 2rem); /* Sidebar width + original padding */
   }
 }

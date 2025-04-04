@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { FaBook, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import "./Navbar.css";
 
 function Navbar({ isLoggedIn, setIsLoggedIn }) {
@@ -23,14 +24,23 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
-        <h1 onClick={navigateHome} className="logo-text">
-          Calgary Private Library
-        </h1>
+      <div className="navbar-logo" onClick={navigateHome}>
+        <FaBook className="logo-icon" />
+        <h1 className="logo-text">Calgary Private Library</h1>
       </div>
       <div className="navbar-auth">
         <button className="auth-button" onClick={handleAuthClick}>
-          {isLoggedIn ? "Log Out" : "Log In"}
+          {isLoggedIn ? (
+            <>
+              <FaSignOutAlt className="auth-icon" />
+              <span>Log Out</span>
+            </>
+          ) : (
+            <>
+              <FaSignInAlt className="auth-icon" />
+              <span>Log In</span>
+            </>
+          )}
         </button>
       </div>
     </nav>

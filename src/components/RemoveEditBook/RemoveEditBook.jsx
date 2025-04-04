@@ -189,19 +189,17 @@ function RemoveEditBook() {
       <div className="search-container">
         <form onSubmit={handleSearch} className="search-form">
           <div className="search-input-wrapper">
-            <FaSearch className="search-icon" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="ISBN, genre, title, author"
               className="search-input"
-              style={{ paddingLeft: "2.5rem" }}
             />
+            <button type="submit" className="search-button">
+              <FaSearch className="search-button-icon" />
+            </button>
           </div>
-          <button type="submit" className="search-button">
-            Search
-          </button>
         </form>
       </div>
 
