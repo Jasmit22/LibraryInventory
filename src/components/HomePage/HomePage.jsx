@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getFeaturedBooks } from "../../services/BookService";
-import { FaArrowRight, FaSearch, FaUsers } from "react-icons/fa";
+import { FaArrowRight, FaSearch, FaUsers, FaKeyboard } from "react-icons/fa";
 import "./HomePage.css";
 
 function HomePage() {
@@ -113,6 +113,51 @@ function HomePage() {
             ))}
           </div>
         )}
+      </section>
+
+      <section className="keyboard-shortcuts-section">
+        <div className="section-header">
+          <h2>Keyboard Shortcuts</h2>
+          <div className="view-all-button">
+            <FaKeyboard /> Quick Navigation
+          </div>
+        </div>
+
+        <p>
+          Press <strong>Alt</strong> (or <strong>Option ⌥</strong> on Mac) + the
+          following keys for quick navigation:
+        </p>
+
+        <div className="shortcuts-grid">
+          <div className="shortcut-card">
+            <div className="shortcut-key">Alt + A</div>
+            <p className="shortcut-description">
+              Add a new book to the library
+            </p>
+          </div>
+
+          <div className="shortcut-card">
+            <div className="shortcut-key">Alt + S</div>
+            <p className="shortcut-description">
+              Search for books in the library
+            </p>
+          </div>
+
+          <div className="shortcut-card">
+            <div className="shortcut-key">Alt + R/E</div>
+            <p className="shortcut-description">Remove or edit books</p>
+          </div>
+
+          <div className="shortcut-card">
+            <div className="shortcut-key">Alt + V</div>
+            <p className="shortcut-description">View library members</p>
+          </div>
+
+          <div className="shortcut-card">
+            <div className="shortcut-key">Alt + D</div>
+            <p className="shortcut-description">Manage book deliveries</p>
+          </div>
+        </div>
       </section>
     </main>
   );

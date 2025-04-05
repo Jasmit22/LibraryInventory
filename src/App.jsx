@@ -11,6 +11,7 @@ import AddBook from "./components/AddBook/AddBook";
 import RemoveEditBook from "./components/RemoveEditBook/RemoveEditBook";
 import ViewMember from "./components/ViewMember/ViewMember";
 import HomePage from "./components/HomePage/HomePage";
+import KeyboardShortcuts from "./components/KeyboardShortcuts/KeyboardShortcuts";
 
 function App() {
   // Initialize state from localStorage
@@ -34,6 +35,9 @@ function App() {
         >
           {/* Sidebar Component */}
           <Sidebar isLoggedIn={isLoggedIn} />
+
+          {/* Keyboard Shortcuts Component */}
+          {isLoggedIn && <KeyboardShortcuts />}
 
           {/* Routes */}
           <div className="main-wrapper">
