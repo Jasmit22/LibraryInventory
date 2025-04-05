@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Login from "./components/Login/Login";
 import Footer from "./components/Footer/Footer";
 import Deliveries from "./components/Deliveries/Deliveries";
+import OrderBook from "./components/OrderBook/OrderBook";
 import BookSearch from "./components/BookSearch/BookSearch";
 import AddBook from "./components/AddBook/AddBook";
 import RemoveEditBook from "./components/RemoveEditBook/RemoveEditBook";
@@ -63,6 +64,12 @@ function App() {
                 }
               />
               <Route
+                path="/order-book"
+                element={
+                  !isLoggedIn ? <Navigate to="/login" replace /> : <OrderBook />
+                }
+              />
+              <Route
                 path="/book-search"
                 element={
                   !isLoggedIn ? (
@@ -104,7 +111,7 @@ function App() {
         </div>
 
         {/* Footer Component */}
-        <Footer />
+        <Footer isLoggedIn={isLoggedIn} />
       </div>
     </BrowserRouter>
   );

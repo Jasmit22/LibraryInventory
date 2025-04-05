@@ -18,7 +18,8 @@
       "imageUrl": "/images/books/the-great-gatsby.jpg",
       "status": "21 days left"
     },
-    "holds": null
+    "holds": null,
+    "hasOverdue": true
   },
   {
     "id": 2,
@@ -48,7 +49,8 @@
       "type": "Hardcover",
       "imageUrl": "/images/books/the-hobbit.jpg",
       "status": "~2 weeks wait"
-    }
+    },
+    "hasOverdue": false
   },
   {
     "id": 3,
@@ -78,7 +80,8 @@
       "type": "Hardcover",
       "imageUrl": "/images/books/pride-and-prejudice.jpg",
       "status": "~8 weeks wait"
-    }
+    },
+    "hasOverdue": false
   },
   {
     "id": 4,
@@ -99,7 +102,8 @@
       "type": "Paperback",
       "imageUrl": "/images/books/the-alchemist.jpg",
       "status": "~5 weeks wait"
-    }
+    },
+    "hasOverdue": false
   },
   {
     "id": 5,
@@ -121,7 +125,8 @@
       "description": "The first novel in the Harry Potter series, introducing the young wizard Harry Potter.",
       "imageUrl": "/images/books/harry-potter.jpg",
       "status": "~3 weeks wait"
-    }
+    },
+    "hasOverdue": false
   },
   {
     "id": 6,
@@ -143,7 +148,8 @@
       "imageUrl": "/images/books/the-hobbit.jpg",
       "status": "21 days left"
     },
-    "holds": null
+    "holds": null,
+    "hasOverdue": true
   },
   {
     "id": 7,
@@ -175,7 +181,8 @@
       "description": "The first novel in the Harry Potter series, introducing the young wizard Harry Potter.",
       "imageUrl": "/images/books/harry-potter.jpg",
       "status": "~1 week wait"
-    }
+    },
+    "hasOverdue": true
   },
   {
     "id": 8,
@@ -188,13 +195,13 @@
     "isHolding": true,
     "borrowed": {
       "id": 7,
-    "title": "The Catcher in the Rye",
-    "author": "J.D. Salinger",
-    "isbn": "9780316769488",
-    "genre": "Fiction",
-    "type": "Paperback",
-    "description": "A novel about the experiences of a teenager, Holden Caulfield, in New York City.",
-    "imageUrl": "/images/books/the-catcher-in-the-rye.jpg"
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "isbn": "9780316769488",
+      "genre": "Fiction",
+      "type": "Paperback",
+      "description": "A novel about the experiences of a teenager, Holden Caulfield, in New York City.",
+      "imageUrl": "/images/books/the-catcher-in-the-rye.jpg"
     },
     "holds": {
       "id": 8,
@@ -206,7 +213,8 @@
       "description": "An epic high-fantasy novel that follows the quest to destroy the One Ring.",
       "imageUrl": "/images/books/the-lord-of-the-rings.jpg",
       "status": "~3 weeks wait"
-    }
+    },
+    "hasOverdue": true
   },
   {
     "id": 9,
@@ -228,7 +236,8 @@
       "imageUrl": "/images/books/brave-new-world.jpg",
       "status": "9 days left"
     },
-    "holds": null
+    "holds": null,
+    "hasOverdue": false
   },
   {
     "id": 10,
@@ -240,6 +249,7 @@
     "isBorrowing": false,
     "isHolding": false,
     "borrowed": null,
-    "holds": null
+    "holds": null,
+    "hasOverdue": false
   }
 ]

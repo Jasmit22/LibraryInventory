@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import {
   FaSearch,
-  FaTimes,
   FaUser,
-  FaBook,
-  FaCalendarAlt,
+  FaSortUp,
+  FaSortDown,
+  FaSort,
+  FaExclamationCircle,
+  FaCheckCircle,
 } from "react-icons/fa";
 import { getAllMembers } from "../../services/MemberService";
 import Modal from "../common/Modal/Modal";
@@ -104,6 +106,14 @@ function ViewMember() {
     const sortedResults = [...searchResults].sort((a, b) => {
       let valueA, valueB;
 
+      // Special handling for ID field - sort numerically
+      if (field === "id") {
+        valueA = a.id;
+        valueB = b.id;
+        return newDirection === "asc" ? valueA - valueB : valueB - valueA;
+      }
+
+      // Special handling for name field
       if (field === "name") {
         valueA = `${a.firstName} ${a.lastName}`.toLowerCase();
         valueB = `${b.firstName} ${b.lastName}`.toLowerCase();
@@ -112,12 +122,40 @@ function ViewMember() {
         valueB = b[field] ? String(b[field]).toLowerCase() : "";
       }
 
+      // For boolean fields like hasOverdue
+      if (typeof valueA === "boolean") {
+        return newDirection === "asc"
+          ? valueA === valueB
+            ? 0
+            : valueA
+            ? 1
+            : -1
+          : valueA === valueB
+          ? 0
+          : valueA
+          ? -1
+          : 1;
+      }
+
+      // String comparison for other fields
       if (valueA < valueB) return newDirection === "asc" ? -1 : 1;
       if (valueA > valueB) return newDirection === "asc" ? 1 : -1;
       return 0;
     });
 
     setSearchResults(sortedResults);
+  };
+
+  // Helper function to render sort icon
+  const renderSortIcon = (field) => {
+    if (sortField !== field) {
+      return <FaSort className="sort-icon" />;
+    }
+    return sortDirection === "asc" ? (
+      <FaSortUp className="sort-icon active" />
+    ) : (
+      <FaSortDown className="sort-icon active" />
+    );
   };
 
   return (
@@ -161,56 +199,55 @@ function ViewMember() {
                         onClick={() => handleSort("id")}
                         className="sortable-header"
                       >
-                        Library ID
-                        {sortField === "id" && (
-                          <span className="sort-indicator">
-                            {sortDirection === "asc" ? " ▲" : " ▼"}
-                          </span>
-                        )}
+                        <div className="header-content">
+                          <span>Library ID</span>
+                          {renderSortIcon("id")}
+                        </div>
                       </th>
                       <th
                         onClick={() => handleSort("name")}
                         className="sortable-header"
                       >
-                        Name
-                        {sortField === "name" && (
-                          <span className="sort-indicator">
-                            {sortDirection === "asc" ? " ▲" : " ▼"}
-                          </span>
-                        )}
+                        <div className="header-content">
+                          <span>Name</span>
+                          {renderSortIcon("name")}
+                        </div>
                       </th>
                       <th
                         onClick={() => handleSort("email")}
                         className="sortable-header"
                       >
-                        Email
-                        {sortField === "email" && (
-                          <span className="sort-indicator">
-                            {sortDirection === "asc" ? " ▲" : " ▼"}
-                          </span>
-                        )}
+                        <div className="header-content">
+                          <span>Email</span>
+                          {renderSortIcon("email")}
+                        </div>
                       </th>
                       <th
                         onClick={() => handleSort("phone")}
                         className="sortable-header"
                       >
-                        Phone
-                        {sortField === "phone" && (
-                          <span className="sort-indicator">
-                            {sortDirection === "asc" ? " ▲" : " ▼"}
-                          </span>
-                        )}
+                        <div className="header-content">
+                          <span>Phone</span>
+                          {renderSortIcon("phone")}
+                        </div>
                       </th>
                       <th
                         onClick={() => handleSort("address")}
                         className="sortable-header"
                       >
-                        Address
-                        {sortField === "address" && (
-                          <span className="sort-indicator">
-                            {sortDirection === "asc" ? " ▲" : " ▼"}
-                          </span>
-                        )}
+                        <div className="header-content">
+                          <span>Address</span>
+                          {renderSortIcon("address")}
+                        </div>
+                      </th>
+                      <th
+                        onClick={() => handleSort("hasOverdue")}
+                        className="sortable-header"
+                      >
+                        <div className="header-content">
+                          <span>Has Overdue</span>
+                          {renderSortIcon("hasOverdue")}
+                        </div>
                       </th>
                     </tr>
                   </thead>
@@ -229,6 +266,19 @@ function ViewMember() {
                         <td>{member.email}</td>
                         <td>{member.phone || "-"}</td>
                         <td>{member.address || "-"}</td>
+                        <td className="overdue-status-cell">
+                          {member.hasOverdue ? (
+                            <div className="overdue-indicator overdue">
+                              <FaExclamationCircle />
+                              <span>Yes</span>
+                            </div>
+                          ) : (
+                            <div className="overdue-indicator no-overdue">
+                              <FaCheckCircle />
+                              <span>No</span>
+                            </div>
+                          )}
+                        </td>
                       </tr>
                     ))}
                   </tbody>

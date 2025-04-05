@@ -100,6 +100,25 @@ function Deliveries() {
     }
   };
 
+  // Calculate progress percentage based on status
+  const getDeliveryProgress = (status) => {
+    if (!status) return 25; // Default progress for items without status
+
+    switch (status.toLowerCase()) {
+      case "arrived":
+      case "delivered":
+        return 100;
+      case "delayed":
+        return 40;
+      case "on schedule":
+        return 50;
+      case "in transit":
+        return 75;
+      default:
+        return 25;
+    }
+  };
+
   return (
     <div className="deliveries-container">
       <h1 className="deliveries-title">Deliveries</h1>
@@ -165,6 +184,24 @@ function Deliveries() {
                       <p>
                         <strong>Author:</strong> {delivery.author}
                       </p>
+
+                      {/* Progress Bar */}
+                      <div className="delivery-progress">
+                        <div className="progress-bar-container">
+                          <div
+                            className={`progress-bar ${getStatusBadgeClass(
+                              delivery.status
+                            )}`}
+                            style={{
+                              width: `${getDeliveryProgress(delivery.status)}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <div className="progress-label">
+                          <span>{delivery.status || "On Schedule"}</span>
+                          <span>{getDeliveryProgress(delivery.status)}%</span>
+                        </div>
+                      </div>
 
                       {/* Origin-Destination Section */}
                       <div className="delivery-route">
@@ -249,6 +286,24 @@ function Deliveries() {
                       <p>
                         <strong>Author:</strong> {delivery.author}
                       </p>
+
+                      {/* Progress Bar */}
+                      <div className="delivery-progress">
+                        <div className="progress-bar-container">
+                          <div
+                            className={`progress-bar ${getStatusBadgeClass(
+                              delivery.status
+                            )}`}
+                            style={{
+                              width: `${getDeliveryProgress(delivery.status)}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <div className="progress-label">
+                          <span>{delivery.status || "In Transit"}</span>
+                          <span>{getDeliveryProgress(delivery.status)}%</span>
+                        </div>
+                      </div>
 
                       {/* Origin-Destination Section */}
                       <div className="delivery-route">

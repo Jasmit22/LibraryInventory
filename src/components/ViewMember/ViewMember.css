@@ -1,152 +1,140 @@
 /* Main container styles */
 .member-search-container {
-  padding: 2rem;
-  /* max-width: 1400px; */
-  margin: 0 auto;
+  padding: 1.5rem;
   width: 100%;
 }
 
 /* Page title and description */
 .page-title {
-  font-size: 2.2rem;
-  margin-bottom: 0.5rem;
-  color: #1a365d;
-  font-weight: 800;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
   text-align: center;
+  color: #1a365d;
+  font-weight: 700;
 }
 
 .page-description {
   text-align: center;
-  color: #4a5568;
   margin-bottom: 2rem;
+  color: #4a5568;
   font-size: 1.1rem;
 }
 
 /* Search container */
 .search-container {
   display: flex;
-  /* max-width: 600px; */
+  max-width: 600px;
   margin: 0 auto 2rem;
-  background: white;
-  border-radius: 50px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
   overflow: hidden;
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.search-container:focus-within {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
-  border-color: #3182ce;
 }
 
 .search-input {
   flex: 1;
-  padding: 0.9rem 1.5rem;
+  padding: 1rem 1.5rem;
   border: none;
   font-size: 1rem;
   outline: none;
-  background: transparent;
 }
 
 .search-button {
-  background: #1a365d;
+  background-color: #1a365d;
   color: white;
   border: none;
   padding: 0 1.5rem;
-  font-size: 1.2rem;
   cursor: pointer;
-  transition: background-color 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: background-color 0.2s;
 }
 
 .search-button:hover {
-  background: #2c5282;
+  background-color: #2c5282;
 }
 
 /* Results container */
 .results-placeholder {
-  background: white;
+  margin-top: 2rem;
+}
+
+/* Table styles */
+.search-results-container {
+  background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 
-/* Table styles */
-.search-results-container {
-  overflow-x: auto;
-  width: 100%;
-}
-
 .search-results-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.95rem;
 }
 
 .search-results-table thead {
-  background-color: #f7fafc;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  background-color: #f8fafc;
+  border-bottom: 2px solid #e2e8f0;
 }
 
 .search-results-table th {
   padding: 1rem;
-  text-align: left;
   font-weight: 600;
   color: #2d3748;
-  border-bottom: 2px solid #e2e8f0;
+  text-align: left;
 }
 
-.search-results-table tbody tr {
-  transition: all 0.2s;
-  border-bottom: 1px solid #edf2f7;
-}
-
-.search-results-table tbody tr:hover {
-  background-color: #ebf8ff;
+.sortable-header {
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sortable-header:hover {
+  background-color: #edf2f7;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-icon {
+  color: #a0aec0;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.sort-icon.active {
+  color: #3182ce;
 }
 
 .search-results-table td {
   padding: 1rem;
+  border-bottom: 1px solid #edf2f7;
   color: #4a5568;
 }
 
-.search-results-table td strong {
-  color: #2d3748;
+.search-results-table tbody tr {
+  transition: background-color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.search-results-table tbody tr:hover {
+  background-color: #f7fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.search-results-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* Loading and empty states */
 .loading-message,
 .no-results-message {
-  padding: 3rem;
   text-align: center;
+  padding: 3rem;
+  background-color: #f7fafc;
+  border-radius: 8px;
   color: #4a5568;
-  font-size: 1.1rem;
-}
-
-/* Sortable header styles */
-.sortable-header {
-  cursor: pointer;
-  position: relative;
-  user-select: none;
-  transition: background-color 0.2s;
-  padding-right: 1.5rem !important;
-}
-
-.sortable-header:hover {
-  background-color: #e2e8f0;
-}
-
-.sort-indicator {
-  margin-left: 5px;
-  color: #3182ce;
-  font-weight: bold;
 }
 
 /* Member details modal */
@@ -329,23 +317,27 @@
 }
 
 @media (max-width: 768px) {
-  .member-search-container {
-    padding: 1.5rem 1rem;
-  }
-
   .search-container {
     flex-direction: column;
-    border-radius: 12px;
+    box-shadow: none;
   }
 
   .search-input {
-    width: 100%;
-    border-bottom: 1px solid #e2e8f0;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0.75rem;
   }
 
   .search-button {
     width: 100%;
     padding: 0.75rem;
+    border-radius: 8px;
+  }
+
+  .search-results-table {
+    display: block;
+    overflow-x: auto;
   }
 
   .member-details {
@@ -355,8 +347,37 @@
   .member-details-column {
     grid-column: span 1;
   }
+}
 
-  .modal-content {
-    padding: 1rem;
-  }
+/* Add these styles to your existing ViewMember.css file */
+
+.overdue-status-cell {
+  text-align: center;
+}
+
+.overdue-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.overdue-indicator.overdue {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.overdue-indicator.no-overdue {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.overdue-indicator svg {
+  font-size: 0.875rem;
 }

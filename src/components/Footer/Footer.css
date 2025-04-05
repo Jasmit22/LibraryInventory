@@ -53,10 +53,3 @@
     gap: 0.8rem;
   }
 }
-
-/* For desktop view, add padding to the left to account for the sidebar */
-@media (min-width: 769px) {
-  .footer {
-    padding-left: calc(250px + 2rem); /* Sidebar width + original padding */
-  }
-}

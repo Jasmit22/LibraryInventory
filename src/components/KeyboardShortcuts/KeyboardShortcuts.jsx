@@ -17,8 +17,10 @@ function KeyboardShortcuts() {
           83: "/book-search", // S
           82: "/remove-edit-book", // R
           69: "/remove-edit-book", // E
-          86: "/view-member", // V
+          77: "/view-member", // M
           68: "/deliveries", // D
+          79: "/order-book", // O
+          76: "/", // L (for Landing/Home page)
         };
 
         if (keyCodeMap[event.keyCode]) {

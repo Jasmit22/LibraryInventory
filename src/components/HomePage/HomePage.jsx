@@ -149,13 +149,23 @@ function HomePage() {
           </div>
 
           <div className="shortcut-card">
-            <div className="shortcut-key">Alt + V</div>
+            <div className="shortcut-key">Alt + M</div>
             <p className="shortcut-description">View library members</p>
           </div>
 
           <div className="shortcut-card">
             <div className="shortcut-key">Alt + D</div>
             <p className="shortcut-description">Manage book deliveries</p>
+          </div>
+
+          <div className="shortcut-card">
+            <div className="shortcut-key">Alt + O</div>
+            <p className="shortcut-description">Order new books</p>
+          </div>
+
+          <div className="shortcut-card">
+            <div className="shortcut-key">Alt + L</div>
+            <p className="shortcut-description">Return to home page</p>
           </div>
         </div>
       </section>

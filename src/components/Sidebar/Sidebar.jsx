@@ -9,6 +9,7 @@ import {
   FaEdit,
   FaUser,
   FaTruck,
+  FaShoppingCart,
 } from "react-icons/fa";
 import "./Sidebar.css";
 
@@ -167,6 +168,17 @@ function Sidebar({ isLoggedIn }) {
                   }
                 >
                   <FaTruck /> View Deliveries
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/order-book"
+                  onClick={() => isMobile && setSidebarOpen(false)}
+                  className={
+                    location.pathname === "/order-book" ? "active" : ""
+                  }
+                >
+                  <FaShoppingCart /> Order Book
                 </Link>
               </li>
             </ul>
