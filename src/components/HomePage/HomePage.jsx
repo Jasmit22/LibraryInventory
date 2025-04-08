@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getFeaturedBooks } from "../../services/BookService";
 import { FaArrowRight, FaSearch, FaUsers, FaKeyboard } from "react-icons/fa";
+import BookDetailsModal from "../BookSearch/BookDetailsModal";
 import "./HomePage.css";
 
 function HomePage() {
   const [newBooks, setNewBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   useEffect(() => {
     const loadNewBooks = async () => {
@@ -34,9 +38,16 @@ function HomePage() {
     navigate("/view-member");
   };
 
-  const handleBookClick = (bookId) => {
-    navigate(`/book-search?id=${bookId}`);
+  const handleBookClick = (book) => {
+    setSelectedBook(book);
+    setIsModalOpen(true);
   };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  
+  
 
   return (
     <main className="home-content">
@@ -86,7 +97,7 @@ function HomePage() {
               <div
                 key={book.id}
                 className="book-card"
-                onClick={() => handleBookClick(book.id)}
+                onClick={() => handleBookClick(book)}
               >
                 <div className="book-cover-container">
                   <img
@@ -169,6 +180,12 @@ function HomePage() {
           </div>
         </div>
       </section>
+      <BookDetailsModal
+        book={selectedBook}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
+
     </main>
   );
 }
