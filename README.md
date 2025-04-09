@@ -77,3 +77,19 @@ Once the link is opened, you will be greeted by the landing page where can view 
 
 - Username: user
 - Password: password
+
+## Walkthrough 1: Search Book
+
+1. Click Book Search on the left bar or on the Home Page or press Alt (or Option ⌥ on Mac) + S
+2. Search up any of the following Titles, Genres, Authors, or ISBNs:
+   | Title | ISBN| Author | Genre |
+   |----------|----------|----------|----------|
+   | The Great Gatsby| 9780743273565 | F. Scott Fitzgerald| Classic |
+   | To Kill a Mockingbird| 9780061120084 | Harper Lee| Fiction |
+   | 1984 | 9780451524935 | George Orwell | Dystopian |
+   | Pride and Prejudice | 9780141439518 | Jane Austen |Romance |
+   | The Hobbit | 9780547928227| J.R.R. Tolkien |Fantasy |
+   | Harry Potter | 9780590353427 | J.K. Rowling |Fantasy |
+   | The Catcher in the Rye | 9780316769488 | J.D. Salinger |Fiction |
+   | The Lord of the Rings | 9780618640157 | J.R.R. Tolkien |Fantasy |
+   | Brave New World | 9780060850524 | Aldous Huxley |Dystopian |
