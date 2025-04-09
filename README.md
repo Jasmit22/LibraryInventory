@@ -83,7 +83,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 ## Walkthrough 1: Search Book
 
 1. Click Book Search on the left bar or on the Home Page or press Alt (or Option ⌥ on Mac) + S
-2. Search up any of the following Titles, Genres, Authors, or ISBNs:
+2. Enter any of the following Titles, Genres, Authors, or ISBNs into the Search bar:
    | Title | ISBN| Author | Genre |
    |----------|----------|----------|----------|
    | The Great Gatsby| 9780743273565 | F. Scott Fitzgerald| Classic |
@@ -95,3 +95,8 @@ Keyboard Shortcuts are found at the bottom of the home page.
    | The Catcher in the Rye | 9780316769488 | J.D. Salinger |Fiction |
    | The Lord of the Rings | 9780618640157 | J.R.R. Tolkien |Fantasy |
    | Brave New World | 9780060850524 | Aldous Huxley |Dystopian |
+
+3. Click on the Filter button to refine your search. Make sure to click "Apply Filter" to apply the filters. "Resst" button will remove all the applied filters
+
+4. Click on a book of your choice to view the information of the book that will appear on a pop-up
+5. Click the "X" on the top right or click outside the pop-up to close it
