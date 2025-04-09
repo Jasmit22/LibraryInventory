@@ -420,3 +420,24 @@
     padding: 1.5rem;
   }
 }
+
+.book-card.clickable {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.book-card.clickable:hover {
+  transform: translateY(-8px);
+}
+
+.book-card:not(.clickable) {
+  cursor: default;
+}
+
+.book-card:not(.clickable) .book-cover-image {
+  transform: none;
+}
+
+.book-card:not(.clickable):hover .book-cover-image {
+  transform: none;
+}

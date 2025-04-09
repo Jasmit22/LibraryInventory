@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
-function Footer() {
+function Footer({ isLoggedIn }) {
   return (
     <footer className="footer">
       <p>&copy; 2025 Calgary Private Library. All rights reserved.</p>
