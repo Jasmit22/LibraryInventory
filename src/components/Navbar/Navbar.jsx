@@ -11,6 +11,9 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       // If logged in, log out and clear localStorage
       setIsLoggedIn(false);
       localStorage.removeItem("isLoggedIn");
+
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new Event("loginStateChanged"));
     } else {
       // If not logged in, navigate to login page
       navigate("/login");

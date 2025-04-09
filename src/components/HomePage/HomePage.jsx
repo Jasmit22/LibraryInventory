@@ -13,11 +13,24 @@ function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // Check login status whenever the component renders or is focused
   useEffect(() => {
-    // Check login status from localStorage
-    const loggedInStatus = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(loggedInStatus);
+    const checkLoginStatus = () => {
+      const loggedInStatus = localStorage.getItem("isLoggedIn") === "true";
+      setIsLoggedIn(loggedInStatus);
+    };
 
+    // Check initially
+    checkLoginStatus();
+
+    // Set up interval to check login status every second
+    const intervalId = setInterval(checkLoginStatus, 1000);
+
+    // Clean up interval on unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
     const loadNewBooks = async () => {
       setLoading(true);
       try {
