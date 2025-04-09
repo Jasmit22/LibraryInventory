@@ -6,7 +6,7 @@ Jasmit Saroya, Mufaro Mungoni, Stephanie Sevilla, Maxinne Sanchez, and Jayden Ma
 
 Use the insructions below to run the application on your local device:
 
-## ✅ Step 1: Install Prerequisites
+## Step 1: Install Prerequisites
 
 1. **Node.js** (Download it from [https://nodejs.org](https://nodejs.org))  
    - Install the **LTS** version for better stability.
@@ -24,7 +24,7 @@ Use the insructions below to run the application on your local device:
 
 ---
 
-## ✅ Step 2: Clone the Repository
+## Step 2: Clone the Repository
 Open a terminal and navigate to the folder where you want to clone the repository. Then run:
 
 ```bash
@@ -33,7 +33,7 @@ git clone https://github.com/Jasmit22/LibraryInventory.git
 
 ---
 
-## ✅ Step 3: Navigate to the Project Directory
+## Step 3: Navigate to the Project Directory
 
 ```bash
 cd LibraryInventory
@@ -41,7 +41,7 @@ cd LibraryInventory
 
 ---
 
-## ✅ Step 4: Install Dependencies
+## Step 4: Install Dependencies
 
 ```bash
 npm install
@@ -51,7 +51,7 @@ This will install all the dependencies listed in the `package.json` file.
 
 ---
 
-## ✅ Step 5: Start the Development Server
+## Step 5: Start the Development Server
 
 ```bash
 npm run dev
