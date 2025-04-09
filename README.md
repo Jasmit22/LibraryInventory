@@ -78,6 +78,8 @@ Once the link is opened, you will be greeted by the landing page where can view 
 - Username: user
 - Password: password
 
+Keyboard Shortcuts are found at the bottom of the home page.
+
 ## Walkthrough 1: Search Book
 
 1. Click Book Search on the left bar or on the Home Page or press Alt (or Option ⌥ on Mac) + S
