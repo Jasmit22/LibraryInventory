@@ -3,7 +3,6 @@
 This project is a Library Management System built with React and Vite. It allows users to manage books, authors, and library operations. Use the insructions below to run the application on your local device:
 
 ## ✅ Step 1: Install Prerequisites
-Make sure you have the following installed on your machine:
 
 1. **Node.js** (Download it from [https://nodejs.org](https://nodejs.org))  
    - Install the **LTS** version for better stability.
@@ -28,12 +27,9 @@ Open a terminal and navigate to the folder where you want to clone the repositor
 git clone https://github.com/Jasmit22/LibraryInventory.git
 ```
 
-This will create a local copy of the repository.
-
 ---
 
 ## ✅ Step 3: Navigate to the Project Directory
-Change into the project directory:
 
 ```bash
 cd LibraryInventory
@@ -42,7 +38,6 @@ cd LibraryInventory
 ---
 
 ## ✅ Step 4: Install Dependencies
-Use npm to install the project dependencies:
 
 ```bash
 npm install
@@ -53,7 +48,6 @@ This will install all the dependencies listed in the `package.json` file.
 ---
 
 ## ✅ Step 5: Start the Development Server
-Start the Vite development server using:
 
 ```bash
 npm run dev
