@@ -140,3 +140,13 @@ Keyboard Shortcuts are found at the bottom of the home page.
 5. Click "Remove", another confirmation pop-up will appear to confirm the suucessful removal of the book you selected
 6. Click the "X" on the top right or click outside the pop-up to close it
 7. Use Book Search Feature to verify your deletion (this doesnt work lol)
+
+## Walkthrough 4: Edit a Book in the System
+
+1. Click "Remove/Edit Book" on the left bar or press Alt (or Option ⌥ on Mac) + R or E
+2. Follow Step 2 from **Walkthrough 1**
+3. Click on a book you wish to edit and a pop-up will appear with the book's information and an option to "Save" or "Remove"
+4. All the fields are editable so you can edit any of them
+5. Click "Save" when you are finished editing, a pop-up will appear with the a summary of the changes you have made.
+6. Click the "X" on the top right or click outside the pop-up to close it
+7. Use Book Search Feature to verify your edits (this doesnt work lol)
