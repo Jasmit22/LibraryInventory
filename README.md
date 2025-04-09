@@ -82,7 +82,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 
 ## Walkthrough 1: Search Book
 
-1. Click Book Search on the left bar or on the Home Page or press Alt (or Option ⌥ on Mac) + S
+1. Click "Book Search" on the left bar or on the Home Page or press Alt (or Option ⌥ on Mac) + S
 2. Enter any of the following Titles, Genres, Authors, or ISBNs into the Search bar:
    | Title | ISBN| Author | Genre |
    |----------|----------|----------|----------|
@@ -103,7 +103,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 
 ## Walkthrough 2a: Add a Book to the System using ISBN
 
-1. Click Add Book on the left bar or press Alt (or Option ⌥ on Mac) + A
+1. Click "Add Book" on the left bar or press Alt (or Option ⌥ on Mac) + A
 2. Enter the following ISBN in the ISBN Lookup bar: 9780525559474
 3. Click "Lookup" and the information will auto-fill in all the fields
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
@@ -113,7 +113,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 
 ## Walkthrough 2b: Add a Book to the System using Scanner
 
-1. Click Add Book on the left bar or press Alt (or Option ⌥ on Mac) + A
+1. Click "Add Book" on the left bar or press Alt (or Option ⌥ on Mac) + A
 2. Click the "Scan Book" button to simulate a scanner scanning the barcode of a book
 3. Once book is successfully scanned the information will auto-fill in all the fields
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
@@ -123,10 +123,20 @@ Keyboard Shortcuts are found at the bottom of the home page.
 
 ## Walkthrough 2c: Add a Book to the System Manually
 
-1. Click Add Book on the left bar or press Alt (or Option ⌥ on Mac) + A
-2. Enter random information in the required fields
+1. Click "Add Book" on the left bar or press Alt (or Option ⌥ on Mac) + A
+2. Enter random information in the required fields, except the ISBN field
 3. Enter 9780525559474 in the ISBN
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
    - a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
    - b. Click "Add Another Book" to restart this walkthrough for another book
    - c. Click "Keep Editing" to modify or fix any mistakes that might have been made
+
+## Walkthrough 3: Remove a Book from the System
+
+1. Click "Remove/Edit Book" on the left bar or press Alt (or Option ⌥ on Mac) + R or E
+2. Follow Step 2 from **Walkthrough 1**
+3. Click on a book you wish to remove and a pop-up will appear with the book's information and an option to "Save" or "Remove"
+4. Click "Remove", a conformation pop-up with a messsage will to make sure you want to continue with the action
+5. Click "Remove", another confirmation pop-up will appear to confirm the suucessful removal of the book you selected
+6. Click the "X" on the top right or click outside the pop-up to close it
+7. Use Book Search Feature to verify your deletion (this doesnt work lol)
