@@ -13,7 +13,7 @@ import RemoveEditBook from "./components/RemoveEditBook/RemoveEditBook";
 import ViewMember from "./components/ViewMember/ViewMember";
 import HomePage from "./components/HomePage/HomePage";
 import KeyboardShortcuts from "./components/KeyboardShortcuts/KeyboardShortcuts";
-
+import OrderBookReview from "./components/OrderBookReview/OrderBookReview";
 function App() {
   // Initialize state from localStorage
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -67,6 +67,16 @@ function App() {
                 path="/order-book"
                 element={
                   !isLoggedIn ? <Navigate to="/login" replace /> : <OrderBook />
+                }
+              />
+              <Route
+                path="/order-book-review"
+                element={
+                  !isLoggedIn ? (
+                    <Navigate to="/login" replace />
+                  ) : (
+                    <OrderBookReview />
+                  )
                 }
               />
               <Route

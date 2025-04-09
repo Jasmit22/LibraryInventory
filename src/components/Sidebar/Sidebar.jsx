@@ -10,6 +10,7 @@ import {
   FaUser,
   FaTruck,
   FaShoppingCart,
+  FaClipboardCheck,
 } from "react-icons/fa";
 import "./Sidebar.css";
 
@@ -179,6 +180,11 @@ function Sidebar({ isLoggedIn }) {
                   }
                 >
                   <FaShoppingCart /> Order Book
+                </Link>
+              </li>
+              <li>
+                <Link to="/order-book-review">
+                  <FaClipboardCheck /> Review Requests
                 </Link>
               </li>
             </ul>
