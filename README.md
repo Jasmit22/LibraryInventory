@@ -150,3 +150,10 @@ Keyboard Shortcuts are found at the bottom of the home page.
 5. Click "Save" when you are finished editing, a pop-up will appear with the a summary of the changes you have made.
 6. Click the "X" on the top right or click outside the pop-up to close it
 7. Use Book Search Feature to verify your edits (this doesnt work lol)
+
+## Walkthrough 5: View a Member in the System
+
+1. Click "View Member" on the left bar or press Alt (or Option ⌥ on Mac) + M
+2. You can sort the list of members by any of the headers by clicking on them
+3. Click on any member, a pop-up will appear with their personal information, books they are borrowing and book they have requested to be put on hold (information cannot be edited as that is outside of the scope of our system)
+4. Click the "X" on the top right or click outside the pop-up to close it
