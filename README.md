@@ -107,9 +107,9 @@ Keyboard Shortcuts are found at the bottom of the home page.
 2. Enter the following ISBN in the ISBN Lookup bar: 9780525559474
 3. Click "Lookup" and the information will auto-fill in all the fields
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
-   a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
-   b. Click "Add Another Book" to restart this walkthrough for another book
-   c. Click "Keep Editing" to modify or fix any mistakes that might have been made
+   - a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
+   - b. Click "Add Another Book" to restart this walkthrough for another book
+   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made
 
 ## Walkthrough 2b: Add a Book to the System using Scanner
 
@@ -117,9 +117,9 @@ Keyboard Shortcuts are found at the bottom of the home page.
 2. Click the "Scan Book" button to simulate a scanner scanning the barcode of a book
 3. Once book is successfully scanned the information will auto-fill in all the fields
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
-   a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
-   b. Click "Add Another Book" to restart this walkthrough for another book
-   c. Click "Keep Editing" to modify or fix any mistakes that might have been made
+   - a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
+   - b. Click "Add Another Book" to restart this walkthrough for another book
+   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made
 
 ## Walkthrough 2c: Add a Book to the System Manually
 
@@ -127,6 +127,6 @@ Keyboard Shortcuts are found at the bottom of the home page.
 2. Enter random information in the required fields
 3. Enter 9780525559474 in the ISBN
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
-   a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
-   b. Click "Add Another Book" to restart this walkthrough for another book
-   c. Click "Keep Editing" to modify or fix any mistakes that might have been made
+   - a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
+   - b. Click "Add Another Book" to restart this walkthrough for another book
+   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made
