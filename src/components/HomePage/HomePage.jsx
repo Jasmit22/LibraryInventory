@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFeaturedBooks } from "../../services/BookService";
+import { getAllBooks } from "../../services/BookService";
 import { FaArrowRight, FaSearch, FaUsers, FaKeyboard } from "react-icons/fa";
 import BookDetailsModal from "../BookSearch/BookDetailsModal";
 import "./HomePage.css";
@@ -12,14 +12,15 @@ function HomePage() {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   useEffect(() => {
     const loadNewBooks = async () => {
       setLoading(true);
       try {
-        // We're still using getFeaturedBooks but will display them as "New Books"
-        const books = await getFeaturedBooks(6);
-        setNewBooks(books);
+        // Get all books and sort by ID to show newest books
+        const books = await getAllBooks();
+        // Sort books by ID in descending order (newer books have higher IDs)
+        const sortedBooks = [...books].sort((a, b) => b.id - a.id);
+        setNewBooks(sortedBooks);
       } catch (error) {
         console.error("Error loading new books:", error);
       } finally {
@@ -46,8 +47,6 @@ function HomePage() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  
-  
 
   return (
     <main className="home-content">
@@ -185,7 +184,6 @@ function HomePage() {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
-
     </main>
   );
 }

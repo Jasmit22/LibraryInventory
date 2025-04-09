@@ -29,6 +29,8 @@ function RemoveEditBook() {
   const [showEditConfirmation, setShowEditConfirmation] = useState(false);
   const [editedBookTitle, setEditedBookTitle] = useState("");
   const [editChanges, setEditChanges] = useState([]);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [showUnsavedChangesModal, setShowUnsavedChangesModal] = useState(false);
 
   // Load some books on initial render
   useEffect(() => {
@@ -84,6 +86,17 @@ function RemoveEditBook() {
       ...editFormData,
       [name]: value,
     });
+
+    // Check if the value is different from the original book
+    if (selectedBook && selectedBook[name] !== value) {
+      setHasUnsavedChanges(true);
+    } else {
+      // Check if any other fields have changes
+      const hasOtherChanges = Object.keys(editFormData).some(
+        (key) => key !== name && selectedBook[key] !== editFormData[key]
+      );
+      setHasUnsavedChanges(hasOtherChanges);
+    }
   };
 
   // Handle edit form submission
@@ -156,6 +169,7 @@ function RemoveEditBook() {
     setEditedBookTitle(editFormData.title);
     setEditChanges(changes);
     setSelectedBook(null);
+    setHasUnsavedChanges(false);
 
     // Show success confirmation
     setShowEditConfirmation(true);
@@ -186,14 +200,27 @@ function RemoveEditBook() {
 
   // Close edit modal
   const handleCloseEditModal = () => {
-    setIsEditing(false);
-    setSelectedBook(null);
+    if (hasUnsavedChanges) {
+      setShowUnsavedChangesModal(true);
+    } else {
+      setIsEditing(false);
+      setSelectedBook(null);
+      setHasUnsavedChanges(false);
+    }
   };
 
   // Close delete modal
   const handleCloseDeleteModal = () => {
     setIsDeleting(false);
     setIsEditing(true);
+  };
+
+  // Add a new function to discard changes
+  const handleDiscardChanges = () => {
+    setIsEditing(false);
+    setSelectedBook(null);
+    setHasUnsavedChanges(false);
+    setShowUnsavedChangesModal(false);
   };
 
   return (
@@ -312,6 +339,34 @@ function RemoveEditBook() {
           editedBookTitle={editedBookTitle}
           editChanges={editChanges}
         />
+      </Modal>
+
+      {/* Unsaved Changes Confirmation Modal */}
+      <Modal
+        isOpen={showUnsavedChangesModal}
+        onClose={() => setShowUnsavedChangesModal(false)}
+        title="Unsaved Changes"
+        size="small"
+      >
+        <div className="unsaved-changes-modal">
+          <p>
+            You have unsaved changes. Are you sure you want to discard them?
+          </p>
+          <div className="modal-actions">
+            <button
+              className="cancel-button"
+              onClick={() => setShowUnsavedChangesModal(false)}
+            >
+              Keep Editing
+            </button>
+            <button
+              className="delete-confirm-button"
+              onClick={handleDiscardChanges}
+            >
+              Discard Changes
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

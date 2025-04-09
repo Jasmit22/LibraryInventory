@@ -32,11 +32,15 @@ function AddBook() {
   const [isLookingUp, setIsLookingUp] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState("");
+  const [isbnError, setIsbnError] = useState("");
   const [addedBook, setAddedBook] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [showUploadMessage, setShowUploadMessage] = useState(false);
   const [lookupSuccess, setLookupSuccess] = useState(false);
   const [scanSuccess, setScanSuccess] = useState(false);
+
+  // Example valid ISBN
+  const validISBN = "9780525559474";
 
   // Clear success messages after 3 seconds
   useEffect(() => {
@@ -53,10 +57,31 @@ function AddBook() {
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setBookData({
-      ...bookData,
-      [name]: value,
-    });
+
+    // Special validation for ISBN field
+    if (name === "isbn") {
+      // Only allow numbers - filter out non-numeric characters
+      const numericValue = value.replace(/\D/g, "");
+
+      // Update the bookData with the filtered value
+      setBookData({
+        ...bookData,
+        [name]: numericValue,
+      });
+    } else {
+      // For other fields, update normally
+      setBookData({
+        ...bookData,
+        [name]: value,
+      });
+    }
+  };
+
+  // Handle ISBN lookup input change
+  const handleIsbnLookupChange = (e) => {
+    // Only allow numeric input
+    const numericValue = e.target.value.replace(/\D/g, "");
+    setIsbnLookup(numericValue);
   };
 
   // Handle ISBN lookup
@@ -65,6 +90,18 @@ function AddBook() {
 
     if (!isbnLookup.trim()) {
       setError("Please enter an ISBN to lookup");
+      return;
+    }
+
+    // Validate ISBN format (only numbers)
+    if (!/^\d+$/.test(isbnLookup.trim())) {
+      setError("ISBN must contain only numbers");
+      return;
+    }
+
+    // Check if it matches the valid ISBN
+    if (isbnLookup.trim() !== validISBN) {
+      setError(`Invalid ISBN. Try using the example: ${validISBN}`);
       return;
     }
 
@@ -98,9 +135,26 @@ function AddBook() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
-    if (!bookData.title || !bookData.author) {
-      setError("Title and Author are required fields");
+    // Basic validation for all required fields
+    if (
+      !bookData.title ||
+      !bookData.author ||
+      !bookData.genre ||
+      !bookData.type ||
+      !bookData.isbn
+    ) {
+      setError("All fields except Description are required");
+      return;
+    }
+
+    // Validate ISBN if provided
+    if (bookData.isbn !== validISBN) {
+      setError(`Invalid ISBN. Only ${validISBN} is accepted.`);
+      return;
+    }
+
+    if (isbnError) {
+      setError(isbnError);
       return;
     }
 
@@ -108,9 +162,10 @@ function AddBook() {
     setError("");
 
     try {
-      // Add default inventory values
+      // Add default inventory values and handle empty description
       const bookWithInventory = {
         ...bookData,
+        description: bookData.description || "", // Ensure empty string if no description
         isAvailable: true,
         inventory: {
           totalCopies: 3,
@@ -174,14 +229,7 @@ function AddBook() {
 
     // Simulate scanning process
     setTimeout(() => {
-      // Generate a random ISBN
-      const randomISBN =
-        "978" +
-        Array.from({ length: 10 }, () => Math.floor(Math.random() * 10)).join(
-          ""
-        );
-
-      // Create sample book data
+      // Use the valid ISBN
       const sampleBookData = {
         title: "The Quantum Universe",
         author: "Brian Cox & Jeff Forshaw",
@@ -189,7 +237,7 @@ function AddBook() {
         type: "Hardcover",
         description:
           "In The Quantum Universe, Brian Cox and Jeff Forshaw approach the world of quantum mechanics in the same way they did in Why Does E=mc2? and make fundamental scientific principles accessible—and fascinating—to everyone.",
-        isbn: randomISBN,
+        isbn: validISBN,
       };
 
       // Populate all fields with sample data
@@ -278,8 +326,8 @@ function AddBook() {
                   <input
                     type="text"
                     value={isbnLookup}
-                    onChange={(e) => setIsbnLookup(e.target.value)}
-                    placeholder="Enter ISBN"
+                    onChange={handleIsbnLookupChange}
+                    placeholder={`Enter ISBN`}
                     className="isbn-input"
                   />
                 </div>
@@ -303,6 +351,9 @@ function AddBook() {
                   <FaCheck /> Book details successfully populated
                 </div>
               )}
+              <div className="isbn-example">
+                <small>Valid ISBN example: {validISBN}</small>
+              </div>
             </div>
 
             {/* Barcode Scanner */}
@@ -365,7 +416,7 @@ function AddBook() {
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="title">
-                      <FaBookOpen /> Title
+                      <FaBookOpen /> Title *
                     </label>
                     <input
                       type="text"
@@ -380,7 +431,7 @@ function AddBook() {
 
                   <div className="form-group">
                     <label htmlFor="author">
-                      <FaUser /> Author
+                      <FaUser /> Author *
                     </label>
                     <input
                       type="text"
@@ -397,13 +448,14 @@ function AddBook() {
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="genre">
-                      <FaTag /> Genre
+                      <FaTag /> Genre *
                     </label>
                     <select
                       id="genre"
                       name="genre"
                       value={bookData.genre}
                       onChange={handleInputChange}
+                      required
                     >
                       <option value="">Select genre</option>
                       <option value="Fiction">Fiction</option>
@@ -426,13 +478,14 @@ function AddBook() {
 
                   <div className="form-group">
                     <label htmlFor="type">
-                      <FaBook /> Type
+                      <FaBook /> Type *
                     </label>
                     <select
                       id="type"
                       name="type"
                       value={bookData.type}
                       onChange={handleInputChange}
+                      required
                     >
                       <option value="">Select type</option>
                       <option value="Hardcover">Hardcover</option>
@@ -446,7 +499,7 @@ function AddBook() {
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="isbn">
-                      <FaBarcode /> ISBN
+                      <FaBarcode /> ISBN *
                     </label>
                     <input
                       type="text"
@@ -454,14 +507,23 @@ function AddBook() {
                       name="isbn"
                       value={bookData.isbn}
                       onChange={handleInputChange}
-                      placeholder="Enter ISBN (optional)"
+                      required
+                      placeholder={`Enter ISBN (e.g., ${validISBN})`}
                     />
+                    {isbnError && (
+                      <div className="field-error">{isbnError}</div>
+                    )}
+                    <div className="isbn-hint">
+                      <small>
+                        Only numbers allowed. Valid ISBN: {validISBN}
+                      </small>
+                    </div>
                   </div>
                 </div>
 
                 <div className="form-group full-width">
                   <label htmlFor="description">
-                    <FaInfoCircle /> Description
+                    <FaInfoCircle /> Description (Optional)
                   </label>
                   <textarea
                     id="description"

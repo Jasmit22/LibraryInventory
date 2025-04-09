@@ -86,7 +86,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
   font-size: 1.25rem;
   margin-left: 0.5rem;
 }
@@ -94,7 +93,6 @@
 .modal-close-button:hover {
   background-color: #f7fafc;
   color: #e53e3e;
-  transform: rotate(90deg);
 }
 
 .modal-close-button svg {

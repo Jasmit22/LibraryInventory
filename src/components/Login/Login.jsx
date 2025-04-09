@@ -8,15 +8,15 @@ function Login({ onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  //reset password
   const [showResetModal, setShowResetModal] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [resetSuccess, setResetSuccess] = useState(false);
   const [resetError, setResetError] = useState("");
 
-  //dummy info. if user types this in as a password, prompt will show
+  //correct credentials
   const validUser = {
-    password: "incorrect",
+    username: "user",
+    password: "password",
   };
 
   const handleSubmit = (e) => {
@@ -29,7 +29,10 @@ function Login({ onLogin }) {
       setError("Please enter your username.");
     } else if (!password) {
       setError("Please enter your password.");
-    } else if (password == validUser.password) {
+    } else if (
+      username !== validUser.username ||
+      password !== validUser.password
+    ) {
       setError("Invalid Username or Password.");
     } else {
       setError("");

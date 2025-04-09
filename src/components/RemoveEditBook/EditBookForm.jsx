@@ -1,4 +1,4 @@
-import { FaTrash, FaCheck, FaTimes } from "react-icons/fa";
+import { FaTrash, FaCheck, FaTimes, FaTag, FaBook } from "react-icons/fa";
 
 function EditBookForm({
   selectedBook,
@@ -58,25 +58,50 @@ function EditBookForm({
 
           <div className="form-column">
             <div className="form-group">
-              <label htmlFor="genre">Genre:</label>
-              <input
-                type="text"
+              <label htmlFor="genre">
+                <FaTag /> Genre:
+              </label>
+              <select
                 id="genre"
                 name="genre"
                 value={editFormData.genre}
                 onChange={handleEditInputChange}
-              />
+              >
+                <option value="">Select genre</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Science Fiction">Science Fiction</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Romance">Romance</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Biography">Biography</option>
+                <option value="History">History</option>
+                <option value="Children">Children</option>
+                <option value="Young Adult">Young Adult</option>
+                <option value="Classic">Classic</option>
+                <option value="Self-Help">Self-Help</option>
+                <option value="Science">Science</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
 
             <div className="form-group">
-              <label htmlFor="type">Type:</label>
-              <input
-                type="text"
+              <label htmlFor="type">
+                <FaBook /> Type:
+              </label>
+              <select
                 id="type"
                 name="type"
                 value={editFormData.type}
                 onChange={handleEditInputChange}
-              />
+              >
+                <option value="">Select type</option>
+                <option value="Hardcover">Hardcover</option>
+                <option value="Paperback">Paperback</option>
+                <option value="E-book">E-book</option>
+                <option value="Audiobook">Audiobook</option>
+              </select>
             </div>
 
             <div className="form-group">
@@ -101,13 +126,6 @@ function EditBookForm({
             <FaTrash /> Remove
           </button>
           <div className="right-actions">
-            <button
-              type="button"
-              className="cancel-button"
-              onClick={handleCloseEditModal}
-            >
-              <FaTimes /> Cancel
-            </button>
             <button type="submit" className="save-button">
               <FaCheck /> Save
             </button>

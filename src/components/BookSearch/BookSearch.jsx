@@ -18,9 +18,10 @@ function BookSearch() {
       setLoading(true);
       try {
         const books = await getAllBooks();
-        // Show some random books initially
-        const shuffled = [...books].sort(() => 0.5 - Math.random());
-        setSearchResults(shuffled.slice(0, 8));
+        // Show new books initially instead of random ones
+        // Sort books by most recent (assuming newer books have higher IDs)
+        const newBooks = [...books].sort((a, b) => b.id - a.id).slice(0, 8);
+        setSearchResults(newBooks);
       } catch (error) {
         console.error("Error fetching books:", error);
       } finally {
@@ -88,7 +89,7 @@ function BookSearch() {
         ) : (
           <>
             <h2 className="results-heading">
-              {hasSearched ? "Search Results" : "Featured Books"}
+              {hasSearched ? "Search Results" : "New Books"}
             </h2>
             <div className="results-grid">
               {searchResults.map((book) => (

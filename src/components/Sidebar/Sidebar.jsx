@@ -118,7 +118,7 @@ function Sidebar({ isLoggedIn }) {
             onClick={() => toggleSection("users")}
           >
             <h3>
-              Manage Users
+              Users
               <FaChevronDown
                 className={`chevron-icon ${
                   expandedSections.users ? "expanded" : ""

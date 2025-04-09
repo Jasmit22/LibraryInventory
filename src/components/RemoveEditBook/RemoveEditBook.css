@@ -491,3 +491,15 @@
   font-size: 1.2rem;
   color: #718096;
 }
+
+/* Add this to your RemoveEditBook.css file */
+.unsaved-changes-modal {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.unsaved-changes-modal p {
+  margin-bottom: 1.5rem;
+  color: #4a5568;
+  font-size: 1.1rem;
+}
