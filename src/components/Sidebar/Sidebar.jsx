@@ -183,7 +183,13 @@ function Sidebar({ isLoggedIn }) {
                 </Link>
               </li>
               <li>
-                <Link to="/order-book-review">
+                <Link
+                  to="/order-book-review"
+                  onClick={() => isMobile && setSidebarOpen(false)}
+                  className={
+                    location.pathname === "/order-book-review" ? "active" : ""
+                  }
+                >
                   <FaClipboardCheck /> Review Requests
                 </Link>
               </li>

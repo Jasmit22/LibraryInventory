@@ -11,8 +11,13 @@ function HomePage() {
   const navigate = useNavigate();
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    // Check login status from localStorage
+    const loggedInStatus = localStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(loggedInStatus);
+
     const loadNewBooks = async () => {
       setLoading(true);
       try {
@@ -40,8 +45,14 @@ function HomePage() {
   };
 
   const handleBookClick = (book) => {
-    setSelectedBook(book);
-    setIsModalOpen(true);
+    // Only show book details if logged in
+    if (isLoggedIn) {
+      setSelectedBook(book);
+      setIsModalOpen(true);
+    } else {
+      // Redirect to login page if not logged in
+      navigate("/login");
+    }
   };
 
   const handleCloseModal = () => {
@@ -53,9 +64,9 @@ function HomePage() {
       <section className="hero-section">
         <div className="hero-overlay">
           <div className="hero-content">
-            <h1>Calgary Private Library</h1>
+            <h1>Calgary Private Library Management System</h1>
             <p className="hero-subtitle">
-              Manage your library's collection and members with ease
+              Manage the library's collection and members with ease
             </p>
             <div className="hero-buttons">
               <button
@@ -95,7 +106,7 @@ function HomePage() {
             {newBooks.map((book) => (
               <div
                 key={book.id}
-                className="book-card"
+                className={`book-card ${isLoggedIn ? "clickable" : ""}`}
                 onClick={() => handleBookClick(book)}
               >
                 <div className="book-cover-container">
@@ -104,9 +115,11 @@ function HomePage() {
                     alt={book.title}
                     className="book-cover-image"
                   />
-                  <div className="book-hover-info">
-                    <span className="view-details">View Details</span>
-                  </div>
+                  {isLoggedIn && (
+                    <div className="book-hover-info">
+                      <span className="view-details">View Details</span>
+                    </div>
+                  )}
                 </div>
                 <div className="book-info">
                   <h3 className="book-title">{book.title}</h3>
@@ -125,60 +138,60 @@ function HomePage() {
         )}
       </section>
 
-      <section className="keyboard-shortcuts-section">
-        <div className="section-header">
-          <h2>Keyboard Shortcuts</h2>
-          <div className="view-all-button">
-            <FaKeyboard /> Quick Navigation
-          </div>
-        </div>
-
-        <p>
-          Press <strong>Alt</strong> (or <strong>Option ⌥</strong> on Mac) + the
-          following keys for quick navigation:
-        </p>
-
-        <div className="shortcuts-grid">
-          <div className="shortcut-card">
-            <div className="shortcut-key">Alt + A</div>
-            <p className="shortcut-description">
-              Add a new book to the library
-            </p>
+      {isLoggedIn && (
+        <section className="keyboard-shortcuts-section">
+          <div className="section-header">
+            <h2>Keyboard Shortcuts</h2>
           </div>
 
-          <div className="shortcut-card">
-            <div className="shortcut-key">Alt + S</div>
-            <p className="shortcut-description">
-              Search for books in the library
-            </p>
-          </div>
+          <p>
+            Press <strong>Alt</strong> (or <strong>Option ⌥</strong> on Mac) +
+            the following keys for quick navigation:
+          </p>
 
-          <div className="shortcut-card">
-            <div className="shortcut-key">Alt + R/E</div>
-            <p className="shortcut-description">Remove or edit books</p>
-          </div>
+          <div className="shortcuts-grid">
+            <div className="shortcut-card">
+              <div className="shortcut-key">Alt + A</div>
+              <p className="shortcut-description">
+                Add a new book to the library
+              </p>
+            </div>
 
-          <div className="shortcut-card">
-            <div className="shortcut-key">Alt + M</div>
-            <p className="shortcut-description">View library members</p>
-          </div>
+            <div className="shortcut-card">
+              <div className="shortcut-key">Alt + S</div>
+              <p className="shortcut-description">
+                Search for books in the library
+              </p>
+            </div>
 
-          <div className="shortcut-card">
-            <div className="shortcut-key">Alt + D</div>
-            <p className="shortcut-description">Manage book deliveries</p>
-          </div>
+            <div className="shortcut-card">
+              <div className="shortcut-key">Alt + R/E</div>
+              <p className="shortcut-description">Remove or edit books</p>
+            </div>
 
-          <div className="shortcut-card">
-            <div className="shortcut-key">Alt + O</div>
-            <p className="shortcut-description">Order new books</p>
-          </div>
+            <div className="shortcut-card">
+              <div className="shortcut-key">Alt + M</div>
+              <p className="shortcut-description">View library members</p>
+            </div>
 
-          <div className="shortcut-card">
-            <div className="shortcut-key">Alt + L</div>
-            <p className="shortcut-description">Return to home page</p>
+            <div className="shortcut-card">
+              <div className="shortcut-key">Alt + D</div>
+              <p className="shortcut-description">Manage book deliveries</p>
+            </div>
+
+            <div className="shortcut-card">
+              <div className="shortcut-key">Alt + O</div>
+              <p className="shortcut-description">Order new books</p>
+            </div>
+
+            <div className="shortcut-card">
+              <div className="shortcut-key">Alt + L</div>
+              <p className="shortcut-description">Return to home page</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
       <BookDetailsModal
         book={selectedBook}
         isOpen={isModalOpen}

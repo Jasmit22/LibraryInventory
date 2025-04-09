@@ -14,6 +14,9 @@ import ViewMember from "./components/ViewMember/ViewMember";
 import HomePage from "./components/HomePage/HomePage";
 import KeyboardShortcuts from "./components/KeyboardShortcuts/KeyboardShortcuts";
 import OrderBookReview from "./components/OrderBookReview/OrderBookReview";
+import Terms from "./components/Terms/Terms";
+import Privacy from "./components/Privacy/Privacy";
+
 function App() {
   // Initialize state from localStorage
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -115,6 +118,9 @@ function App() {
                   )
                 }
               />
+              {/* New routes for Terms and Privacy */}
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
               <Route path="/" element={<HomePage />} />
             </Routes>
           </div>
