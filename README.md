@@ -71,7 +71,7 @@ Open the provided URL (`http://localhost:5173/`) in your browser to see the app 
 
 ---
 
-Once the link is opened, you will be greeted by the landing page where can view book information without needing to login. The keyboard shortcuts will not work unless you are logged in. If you click Book Search, View Members or Log In you will be directed to the Log In Page. Use the credentials below to access the rest of the system.
+Once the link is opened, you will be greeted by the landing page where can view the availability of books without needing to login. The keyboard shortcuts will not work unless you are logged in. If you click on a book, or click on Book Search, View Members or Log In you will be directed to the Log In Page. Use the credentials below to access the rest of the system.
 
 ## Login Credentials
 
