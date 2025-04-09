@@ -1,6 +1,10 @@
 # Library Management System
 
-This project is a Library Management System built with React and Vite. It allows users to manage books, authors, and library operations. Use the insructions below to run the application on your local device:
+This project is a Library Management System built with React and Vite. It allows users to manage books, authors, and library operations. 
+The Project was completed by CPSC 481 Tutorial 2 - Group 2:
+Jasmit Saroya, Mufaro Mungoni, Stephanie Sevilla, Maxinne Sanchez, and Jayden Ma.
+
+Use the insructions below to run the application on your local device:
 
 ## ✅ Step 1: Install Prerequisites
 
