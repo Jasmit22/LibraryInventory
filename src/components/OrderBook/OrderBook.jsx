@@ -484,22 +484,38 @@ function OrderBook() {
               </div>
 
               <div className="form-actions">
-                <button
-                  type="submit"
-                  className="submit-button"
-                  disabled={isSubmitting || !selectedLibrary}
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-end",
+                  }}
                 >
-                  {isSubmitting ? (
-                    <>
-                      <span className="spinner"></span>
-                      Submitting Request...
-                    </>
-                  ) : (
-                    <>
-                      <FaExchangeAlt /> Submit Request
-                    </>
+                  <button
+                    type="submit"
+                    className="submit-button"
+                    disabled={isSubmitting || !selectedLibrary}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <span className="spinner"></span>
+                        Submitting Request...
+                      </>
+                    ) : (
+                      <>
+                        <FaExchangeAlt /> Submit Request
+                      </>
+                    )}
+                  </button>
+
+                  {!selectedLibrary && (
+                    <div className="button-help-text">
+                      <FaExclamationTriangle /> Please select a library location
+                      to enable request submission
+                    </div>
                   )}
-                </button>
+                </div>
               </div>
             </div>
           </form>

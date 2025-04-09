@@ -38,7 +38,7 @@ function OrderBookReview() {
       setLoading(true);
       try {
         // Simulate API call to fetch requests
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 150));
 
         // Sample data for demonstration
         const sampleRequests = [
@@ -154,7 +154,7 @@ function OrderBookReview() {
   const handleApproveRequest = async () => {
     try {
       // In a real app, this would call an API to approve the request
-      await new Promise((resolve) => setTimeout(resolve, 250));
+      await new Promise((resolve) => setTimeout(resolve, 150));
 
       // Update the request status in our local state
       const updatedRequests = requests.map((req) =>
@@ -180,7 +180,7 @@ function OrderBookReview() {
   const handleDeclineRequest = async () => {
     try {
       // In a real app, this would call an API to decline the request
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 150));
 
       // Update the request status in our local state
       const updatedRequests = requests.map((req) =>
