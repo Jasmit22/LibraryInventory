@@ -139,7 +139,8 @@ Keyboard Shortcuts are found at the bottom of the home page.
 4. Click "Remove", a conformation pop-up with a messsage will to make sure you want to continue with the action
 5. Click "Remove", another confirmation pop-up will appear to confirm the suucessful removal of the book you selected
 6. Click the "X" on the top right or click outside the pop-up to close it
-7. Use Book Search Feature to verify your deletion (this doesnt work lol)
+7. Verify your deletion in the same window
+   **NB.** Deletion will not be seen if you Search for the book using Walkthrough 1 because it requires more complex backend implentation which is out of the scope of this class 🚧
 
 ## Walkthrough 4: Edit a Book in the System
 
@@ -149,7 +150,8 @@ Keyboard Shortcuts are found at the bottom of the home page.
 4. All the fields are editable so you can edit any of them
 5. Click "Save" when you are finished editing, a pop-up will appear with the a summary of the changes you have made.
 6. Click the "X" on the top right or click outside the pop-up to close it
-7. Use Book Search Feature to verify your edits (this doesnt work lol)
+7. Verify your edits in the same window
+   **NB.** Edit will not be seen if you Search for the book using Walkthrough 1 because it requires more complex backend implentation which is out of the scope of this class 🚧
 
 ## Walkthrough 5: View a Member in the System
 
@@ -178,3 +180,11 @@ Keyboard Shortcuts are found at the bottom of the home page.
 2. Enter a title, or an author, or a genre, or a status (ie. On Schedule, In Transit, Delayed, Delivered), or location (ie. Publisher A/B/C. Member A/B/C or Library) (Member in this context refers to another library that is a member of the library network)
 3. Click Search button or press Enter key
 4. View the information of the incoming or outgoing order you searched.
+
+## 🚧 Walkthrough 7: Order Book (Under construction)
+
+1. On this page, one would be able order a book from another library location
+
+## 🚧 Walkthrough 8: Review Requests (Under construction)
+
+1. On this page, one would be able to review and approve/deny requests from other libraries
