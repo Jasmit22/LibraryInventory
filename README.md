@@ -155,5 +155,26 @@ Keyboard Shortcuts are found at the bottom of the home page.
 
 1. Click "View Member" on the left bar or press Alt (or Option ⌥ on Mac) + M
 2. You can sort the list of members by any of the headers by clicking on them
+3. Enter any of the following information to search for a member:
+   | ID | First Name | Last Name | Email |
+   |----:|:-----------|:----------|:-----------------------|
+   | 1 | John | Doe | john.doe@gmail.com |
+   | 2 | Jane | Doe | jane.doe@gmail.com |
+   | 3 | Benny | Lee | blee@gmail.com |
+   | 4 | Penn | Pall | pall_penn57@gmail.com |
+   | 5 | Ted | Dee | tdbear@gmail.com |
+   | 6 | Mary | Miles | marymiles1953@gmail.com |
+   | 7 | Samantha | Elliot | sam_elliot67@gmail.com |
+   | 8 | John | Smith | john.smith@gmail.com |
+   | 9 | Amanda | Barnes | barnes.a@gmail.com |
+   | 10 | Ryan | Smith | rsmith@gmail.com |
+
+4. Click on any member, a pop-up will appear with their personal information, books they are borrowing and book they have requested to be put on hold (information cannot be edited as that is outside of the scope of our system)
+5. Click the "X" on the top right or click outside the pop-up to close it
+
+## Walkthrough 6: View a Member in the System
+
+1. Click "View Member" on the left bar or press Alt (or Option ⌥ on Mac) + M
+2. You can sort the list of members by any of the headers by clicking on them
 3. Click on any member, a pop-up will appear with their personal information, books they are borrowing and book they have requested to be put on hold (information cannot be edited as that is outside of the scope of our system)
 4. Click the "X" on the top right or click outside the pop-up to close it
