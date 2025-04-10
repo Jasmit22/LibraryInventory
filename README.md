@@ -174,4 +174,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 
 ## Walkthrough 6: View Delivery Status
 
-1.
+1. Click "View Deliveries" on the left bar or press Alt (or Option ⌥ on Mac) + D
+2. Enter a title, or an author, or a genre, or a status (ie. On Schedule, In Transit, Delayed, Delivered), or location (ie. Publisher A/B/C. Member A/B/C or Library) (Member in this context refers to another library that is a member of the library network)
+3. Click Search button or press Enter key
+4. View the information of the incoming or outgoing order you searched.
