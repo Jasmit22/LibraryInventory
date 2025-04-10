@@ -172,9 +172,6 @@ Keyboard Shortcuts are found at the bottom of the home page.
 4. Click on any member, a pop-up will appear with their personal information, books they are borrowing and book they have requested to be put on hold (information cannot be edited as that is outside of the scope of our system)
 5. Click the "X" on the top right or click outside the pop-up to close it
 
-## Walkthrough 6: View a Member in the System
+## Walkthrough 6: View Delivery Status
 
-1. Click "View Member" on the left bar or press Alt (or Option ⌥ on Mac) + M
-2. You can sort the list of members by any of the headers by clicking on them
-3. Click on any member, a pop-up will appear with their personal information, books they are borrowing and book they have requested to be put on hold (information cannot be edited as that is outside of the scope of our system)
-4. Click the "X" on the top right or click outside the pop-up to close it
+1.
