@@ -1,4 +1,4 @@
-# Library Management System
+# 📚Library Management System
 
 This project is a Library Management System built with React and Vite. It allows users to manage books, authors, and library operations.
 The Project was completed by CPSC 481 Tutorial 2 - Group 2:
@@ -80,7 +80,7 @@ Once the link is opened, you will be greeted by the landing page where can view 
 
 Keyboard Shortcuts are found at the bottom of the home page.
 
-## Walkthrough 1: Search Book
+## 🔍Walkthrough 1: Search Book
 
 1. Click "Book Search" on the left bar or on the Home Page or press Alt (or Option ⌥ on Mac) + S
 2. Enter any of the following Titles, Genres, Authors, or ISBNs into the Search bar:
@@ -101,7 +101,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 4. Click on a book of your choice to view the information of the book that will appear on a pop-up
 5. Click the "X" on the top right or click outside the pop-up to close it
 
-## Walkthrough 2a: Add a Book to the System using ISBN
+## ➕Walkthrough 2a: Add a Book to the System using ISBN
 
 1. Click "Add Book" on the left bar or press Alt (or Option ⌥ on Mac) + A
 2. Enter the following ISBN in the ISBN Lookup bar: 9780525559474
@@ -111,7 +111,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
    - b. Click "Add Another Book" to restart this walkthrough for another book
    - c. Click "Keep Editing" to modify or fix any mistakes that might have been made (Under construction) 🚧
 
-## Walkthrough 2b: Add a Book to the System using Scanner
+## ➕Walkthrough 2b: Add a Book to the System using Scanner
 
 1. Click "Add Book" on the left bar or press Alt (or Option ⌥ on Mac) + A
 2. Click the "Scan Book" button to simulate a scanner scanning the barcode of a book
@@ -121,7 +121,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
    - b. Click "Add Another Book" to restart this walkthrough for another book
    - c. Click "Keep Editing" to modify or fix any mistakes that might have been made (Under construction) 🚧
 
-## Walkthrough 2c: Add a Book to the System Manually
+## ➕Walkthrough 2c: Add a Book to the System Manually
 
 1. Click "Add Book" on the left bar or press Alt (or Option ⌥ on Mac) + A
 2. Enter random information in the required fields, except the ISBN field
@@ -131,7 +131,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
    - b. Click "Add Another Book" to restart this walkthrough for another book
    - c. Click "Keep Editing" to modify or fix any mistakes that might have been made (Under construction) 🚧
 
-## Walkthrough 3: Remove a Book from the System
+## ❌Walkthrough 3: Remove a Book from the System
 
 1. Click "Remove/Edit Book" on the left bar or press Alt (or Option ⌥ on Mac) + R or E
 2. Follow Step 2 from **Walkthrough 1**
@@ -142,7 +142,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 7. Verify your deletion in the same window
    **NB.** Deletion will not be seen if you Search for the book using Walkthrough 1 because it requires more complex backend implentation which is out of the scope of this class 🚧
 
-## Walkthrough 4: Edit a Book in the System
+## 📝Walkthrough 4: Edit a Book in the System
 
 1. Click "Remove/Edit Book" on the left bar or press Alt (or Option ⌥ on Mac) + R or E
 2. Follow Step 2 from **Walkthrough 1**
@@ -153,7 +153,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 7. Verify your edits in the same window
    **NB.** Edit will not be seen if you Search for the book using Walkthrough 1 because it requires more complex backend implentation which is out of the scope of this class 🚧
 
-## Walkthrough 5: View a Member in the System
+## 🧑‍💼Walkthrough 5: View a Member in the System
 
 1. Click "View Member" on the left bar or press Alt (or Option ⌥ on Mac) + M
 2. You can sort the list of members by any of the headers by clicking on them
@@ -174,7 +174,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 4. Click on any member, a pop-up will appear with their personal information, books they are borrowing and book they have requested to be put on hold (information cannot be edited as that is outside of the scope of our system)
 5. Click the "X" on the top right or click outside the pop-up to close it
 
-## Walkthrough 6: View Delivery Status
+## 🚚Walkthrough 6: View Delivery Status
 
 1. Click "View Deliveries" on the left bar or press Alt (or Option ⌥ on Mac) + D
 2. Enter a title, or an author, or a genre, or a status (ie. On Schedule, In Transit, Delayed, Delivered), or location (ie. Publisher A/B/C. Member A/B/C or Library) (Member in this context refers to another library that is a member of the library network)
