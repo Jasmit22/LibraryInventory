@@ -109,7 +109,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
    - a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
    - b. Click "Add Another Book" to restart this walkthrough for another book
-   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made
+   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made (Under construction) 🚧
 
 ## Walkthrough 2b: Add a Book to the System using Scanner
 
@@ -119,7 +119,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
    - a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
    - b. Click "Add Another Book" to restart this walkthrough for another book
-   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made
+   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made (Under construction) 🚧
 
 ## Walkthrough 2c: Add a Book to the System Manually
 
@@ -129,7 +129,7 @@ Keyboard Shortcuts are found at the bottom of the home page.
 4. Click "Add Book" (green button) at the bottom right of the screen and a confirmation message will appear with a summary of the information you entered. From here you have 3 options:
    - a. Click "Go to Book Search" and follow the steps in from **Walkthrough 1** to search for the book you just added
    - b. Click "Add Another Book" to restart this walkthrough for another book
-   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made
+   - c. Click "Keep Editing" to modify or fix any mistakes that might have been made (Under construction) 🚧
 
 ## Walkthrough 3: Remove a Book from the System
 
