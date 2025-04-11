@@ -4,7 +4,17 @@ This project is a Library Management System built with React and Vite. It allows
 The Project was completed by CPSC 481 Tutorial 2 - Group 2:
 Jasmit Saroya, Mufaro Mungoni, Stephanie Sevilla, Maxinne Sanchez, and Jayden Ma.
 
-Use the insructions below to run the application on your local device:
+## Use the link below to access the system (Open link in Google Chrome):
+
+   ```bash
+ https://library-inventory-two.vercel.app/
+   ```
+### Login Credentials
+
+- Username: user
+- Password: password
+
+## Or use the insructions below to run the application on your local device:
 
 ## Step 1: Install Prerequisites
 
