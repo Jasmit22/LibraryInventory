@@ -9,10 +9,13 @@ Jasmit Saroya, Mufaro Mungoni, Stephanie Sevilla, Maxinne Sanchez, and Jayden Ma
    ```bash
  https://library-inventory-two.vercel.app/
    ```
+
 ### Login Credentials
 
 - Username: user
 - Password: password
+
+Once you have access to the system, you skip to the Walkthroughs that are found later in the README
 
 ## Or use the insructions below to run the application on your local device:
 
