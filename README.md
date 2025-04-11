@@ -17,7 +17,7 @@ Jasmit Saroya, Mufaro Mungoni, Stephanie Sevilla, Maxinne Sanchez, and Jayden Ma
 
 Once you have access to the system, you skip to the Walkthroughs that are found later in the README
 
-## Or use the insructions below to run the application on your local device:
+## Or use the instructions below to run the application on your local device:
 
 ### Step 1: Install Prerequisites
 
