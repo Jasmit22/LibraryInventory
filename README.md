@@ -19,7 +19,7 @@ Once you have access to the system, you skip to the Walkthroughs that are found 
 
 ## Or use the insructions below to run the application on your local device:
 
-## Step 1: Install Prerequisites
+### Step 1: Install Prerequisites
 
 1. **Node.js** (Download it from [https://nodejs.org](https://nodejs.org))
 
@@ -39,7 +39,7 @@ Once you have access to the system, you skip to the Walkthroughs that are found 
 
 ---
 
-## Step 2: Clone the Repository
+### Step 2: Clone the Repository
 
 Open a terminal and navigate to the folder where you want to clone the repository. Then run:
 
@@ -49,7 +49,7 @@ git clone https://github.com/Jasmit22/LibraryInventory.git
 
 ---
 
-## Step 3: Navigate to the Project Directory
+### Step 3: Navigate to the Project Directory
 
 ```bash
 cd LibraryInventory
@@ -57,7 +57,7 @@ cd LibraryInventory
 
 ---
 
-## Step 4: Install Dependencies
+### Step 4: Install Dependencies
 
 ```bash
 npm install
@@ -67,7 +67,7 @@ This will install all the dependencies listed in the `package.json` file.
 
 ---
 
-## Step 5: Start the Development Server
+### Step 5: Start the Development Server
 
 ```bash
 npm run dev
@@ -86,7 +86,7 @@ Open the provided URL (`http://localhost:5173/`) in your browser to see the app 
 
 Once the link is opened, you will be greeted by the landing page where can view the availability of books without needing to login. The keyboard shortcuts will not work unless you are logged in. If you click on a book, or click on Book Search, View Members or Log In you will be directed to the Log In Page. Use the credentials below to access the rest of the system.
 
-## Login Credentials
+### Login Credentials
 
 - Username: user
 - Password: password
