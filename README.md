@@ -5,10 +5,8 @@ The Project was completed by CPSC 481 Tutorial 2 - Group 2:
 Jasmit Saroya, Mufaro Mungoni, Stephanie Sevilla, Maxinne Sanchez, and Jayden Ma.
 
 ## Use the link below to access the system (Open link in Google Chrome):
+system link: https://library-inventory-two.vercel.app/
 
-   ```bash
- https://library-inventory-two.vercel.app/
-   ```
 
 ### Login Credentials
 
