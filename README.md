@@ -13,7 +13,7 @@ system link: https://library-inventory-two.vercel.app/
 - Username: user
 - Password: password
 
-Once you have access to the system, you skip to the Walkthroughs that are found later in the README
+Once you have access to the system, skip to the Walkthroughs that are found later in the README
 
 ## Or use the instructions below to run the application on your local device:
 
